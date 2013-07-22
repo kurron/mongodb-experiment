@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
  */
 @JsonAutoDetect( getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE, fieldVisibility = JsonAutoDetect.Visibility.NONE )
 class Instructor {
-    @JsonProperty( value = 'total-reports-generated-coun' )
+    @JsonProperty( value = 'total-reports-generated-count' )
     int totalReportsGeneratedCount
 
     @JsonProperty( value = 'total-assignments-generated-count' )
