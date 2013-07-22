@@ -26,6 +26,6 @@ class JsonSerializerLearningTest extends Specification {
         where:
         builder                     |  unimportant
         new DailyAggregateBuilder() |  'bob'
-        new UserBuilder()           |  'bob'
+        new UserInformationBuilder()           |  'bob'
     }
 }

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
  * Information about a single user in the system.
  */
 @JsonAutoDetect( getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE, fieldVisibility = JsonAutoDetect.Visibility.NONE )
-class User {
+class UserInformation {
     @JsonProperty( value = '_id' )
     String id
 

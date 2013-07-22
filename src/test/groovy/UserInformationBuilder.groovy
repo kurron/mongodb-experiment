@@ -1,16 +1,16 @@
-import org.kurron.domain.User
+import org.kurron.domain.UserInformation
 
 /**
  * Convenience object builder.
  */
-class UserBuilder {
+class UserInformationBuilder {
     /**
      * Generates random data.
      */
     private final RandomDataGenerator generator = new RandomDataGenerator()
 
-    User build() {
-        User user = new User()
+    UserInformation build() {
+        UserInformation user = new UserInformation()
         user.id = generator.randomObjectId()
         user.username = generator.randomHexString()
         user.email = generator.randomEMail()
