@@ -13,4 +13,7 @@ class Administrator {
 
     @JsonProperty( value = 'total-admin-portal-session-count' )
     int totalPortalSessionCount
+
+    @JsonProperty( value = 'total-admin-portal-session-time' )
+    int totalPortalSessionTime
 }
