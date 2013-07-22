@@ -8,6 +8,9 @@ import com.fasterxml.jackson.annotation.JsonProperty
  */
 @JsonAutoDetect( getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE, fieldVisibility = JsonAutoDetect.Visibility.NONE )
 class Student {
+    @JsonProperty( value = 'student-id' )
+    String studentID
+
     @JsonProperty( value = 'sustainment' )
     Sustainment sustainment = new Sustainment()
 

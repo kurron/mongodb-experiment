@@ -12,7 +12,6 @@ class DailyUserAggregateBuilder {
         DailyUserAggregate aggregate = new DailyUserAggregate()
         aggregate.id = generator.randomObjectId()
         aggregate.dateCode = generator.randomLong()
-        aggregate.studentID = generator.randomHexString()
         aggregate.node = generator.randomHexString()
         aggregate.organization = generator.randomHexString()
         2.times {
@@ -26,6 +25,8 @@ class DailyUserAggregateBuilder {
         2.times {
             aggregate.languagesAccessed << generator.randomHexString()
         }
+
+        aggregate.student.studentID = generator.randomHexString()
         aggregate.student.sustainment.learnedItemCount = generator.randomNumberExclusive( 10 )
         aggregate.student.sustainment.staleItemCount = generator.randomNumberExclusive( 100 )
         aggregate.student.sustainment.totalRefreshmentTime = generator.randomNumberExclusive( 100 )
