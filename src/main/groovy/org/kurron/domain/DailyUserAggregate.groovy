@@ -26,9 +26,6 @@ class DailyUserAggregate {
     @JsonProperty( value = 'tags' )
     List<String> tags = new ArrayList<>( 2 )
 
-    @JsonProperty( value = 'new-class-registration-count' )
-    int newClassRegistrationCount
-
     @JsonProperty( value = 'total-lesson-session-count' )
     int totalLessonSessionCount
 
