@@ -44,6 +44,9 @@ class DailyUserAggregate {
     @JsonProperty( value = 'instructor' )
     Instructor instructor = new Instructor()
 
+    @JsonProperty( value = 'administrator' )
+    Administrator administrator = new Administrator()
+
     @JsonProperty( value = 'mobile-data' )
     PlatformData mobileData = new PlatformData()
 

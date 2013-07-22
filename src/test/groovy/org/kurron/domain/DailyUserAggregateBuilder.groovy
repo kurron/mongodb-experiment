@@ -36,6 +36,9 @@ class DailyUserAggregateBuilder {
         aggregate.instructor.totalClassesCreatedCount = generator.randomNumberExclusive( 10 )
         aggregate.instructor.totalInstructorPortalSessionCount = generator.randomNumberExclusive( 10 )
 
+        aggregate.administrator.totalReportsGeneratedCount = generator.randomNumberExclusive( 10 )
+        aggregate.administrator.totalPortalSessionCount = generator.randomNumberExclusive( 10 )
+
         aggregate.mobileData.downloadedListCount = generator.randomNumberExclusive( 10 )
         aggregate.mobileData.downloadedCourseCountCount = generator.randomNumberExclusive( 10 )
         aggregate.mobileData.sessionCount = generator.randomNumberExclusive( 10 )
