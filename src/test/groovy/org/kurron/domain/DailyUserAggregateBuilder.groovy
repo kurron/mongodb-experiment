@@ -30,6 +30,12 @@ class DailyUserAggregateBuilder {
         aggregate.sustainment.staleItemCount = generator.randomNumberExclusive( 100 )
         aggregate.sustainment.totalRefreshmentTime = generator.randomNumberExclusive( 100 )
 
+        aggregate.instructor.totalReportsGeneratedCount = generator.randomNumberExclusive( 10 )
+        aggregate.instructor.totalAssignmentsGeneratedCount = generator.randomNumberExclusive( 10 )
+        aggregate.instructor.totalListsPublishedCount = generator.randomNumberExclusive( 10 )
+        aggregate.instructor.totalClassesCreatedCount = generator.randomNumberExclusive( 10 )
+        aggregate.instructor.totalInstructorPortalSessionCount = generator.randomNumberExclusive( 10 )
+
         aggregate
     }
 }

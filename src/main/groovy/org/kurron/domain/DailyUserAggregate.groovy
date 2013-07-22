@@ -37,4 +37,7 @@ class DailyUserAggregate {
 
     @JsonProperty( value = 'sustainment' )
     Sustainment sustainment = new Sustainment()
+
+    @JsonProperty( value = 'instructor' )
+    Instructor instructor = new Instructor()
 }
