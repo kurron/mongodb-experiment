@@ -1,3 +1,5 @@
+package org.kurron.domain
+
 import org.kurron.domain.DailyUserAggregate
 
 /**

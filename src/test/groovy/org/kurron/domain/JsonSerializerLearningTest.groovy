@@ -1,7 +1,9 @@
+package org.kurron.domain
+
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
-import ClassInformationBuilder
+import org.kurron.domain.ClassInformationBuilder
 import spock.lang.Specification
 
 /**
