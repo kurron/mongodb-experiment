@@ -13,9 +13,11 @@ class UserInformationBuilder {
         user.id = generator.randomObjectId()
         user.studentID = generator.randomHexString()
         user.instructorID = generator.randomHexString()
+        user.administratorID = generator.randomHexString()
         user.email = generator.randomEMail()
-        user.lastLogIn = generator.randomLong()
-        user.instructorFlag = generator.randomBoolean()
+        user.lastLogInAsStudent = generator.randomLong()
+        user.lastLogInAsInstructor = generator.randomLong()
+        user.lastLogInAsAdministrator = generator.randomLong()
         user
     }
 }

@@ -17,11 +17,17 @@ class UserInformation {
     @JsonProperty( value = 'email' )
     String email
 
-    @JsonProperty( value = 'last-logged-in' )
-    long lastLogIn
+    @JsonProperty( value = 'last-logged-in-as-student' )
+    long lastLogInAsStudent
 
-    @JsonProperty( value = 'instructor-flag' )
-    boolean instructorFlag
+    @JsonProperty( value = 'last-logged-in-as-instructor' )
+    long lastLogInAsInstructor
+
+    @JsonProperty( value = 'last-logged-in-as-administrator' )
+    long lastLogInAsAdministrator
+
+    @JsonProperty( value = 'administrator-id' )
+    String administratorID
 
     @JsonProperty( value = 'instructor-id' )
     String instructorID
