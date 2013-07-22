@@ -51,6 +51,17 @@ class DailyUserAggregateBuilder {
             aggregate.student.languagesAccessed << pair
         }
 
+        4.times {
+            LearningContent content = new LearningContent()
+            content.type = generator.randomBoolean() ? 'List' : 'Unit'
+            content.title = generator.randomHexString()
+            LanguagePair pair = new LanguagePair()
+            pair.knownCode = generator.randomHexString()
+            pair.learningCode = generator.randomHexString()
+            pair.sessionCount = generator.randomNumberExclusive( 10 )
+            content.pair = pair
+            aggregate.student.learningContent << content
+        }
         aggregate.instructor.totalReportsGeneratedCount = generator.randomNumberExclusive( 10 )
         aggregate.instructor.totalAssignmentsGeneratedCount = generator.randomNumberExclusive( 10 )
         aggregate.instructor.totalListsPublishedCount = generator.randomNumberExclusive( 10 )
