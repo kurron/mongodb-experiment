@@ -22,4 +22,7 @@ class Instructor {
 
     @JsonProperty( value = 'total-instructor-portal-session-count' )
     int totalInstructorPortalSessionCount
+
+    @JsonProperty( value = 'total-instructor-portal-session-time' )
+    int totalInstructorPortalSessionTime
 }
