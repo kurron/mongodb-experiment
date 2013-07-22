@@ -11,8 +11,8 @@ class DailyUserAggregate {
     @JsonProperty( value = '_id' )
     String id
 
-    @JsonProperty( value = 'daily-aggregate-id' )
-    String dailyAggregateId
+    @JsonProperty( value = 'date-code' )
+    long dateCode
 
     @JsonProperty( value = 'username' )
     String username
