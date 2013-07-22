@@ -22,13 +22,6 @@ class DailyUserAggregateBuilder {
         }
         aggregate.newClassRegistrationCount = generator.randomNumberExclusive( 10 )
         aggregate.totalLessonSessionCount = generator.randomNumberExclusive( 10 )
-        2.times {
-            LanguagePair pair = new LanguagePair()
-            pair.knownCode = generator.randomHexString()
-            pair.learningCode = generator.randomHexString()
-            pair.sessionCount = generator.randomNumberExclusive( 10 )
-            aggregate.languagesAccessed << pair
-        }
 
         aggregate.student.studentID = generator.randomHexString()
         aggregate.student.sustainment.learnedItemCount = generator.randomNumberExclusive( 10 )
@@ -49,6 +42,14 @@ class DailyUserAggregateBuilder {
         aggregate.student.webData.downloadedCourseCountCount = generator.randomNumberExclusive( 10 )
         aggregate.student.webData.sessionCount = generator.randomNumberExclusive( 10 )
         aggregate.student.webData.sessionTime = generator.randomNumberExclusive( 100 )
+
+        2.times {
+            LanguagePair pair = new LanguagePair()
+            pair.knownCode = generator.randomHexString()
+            pair.learningCode = generator.randomHexString()
+            pair.sessionCount = generator.randomNumberExclusive( 10 )
+            aggregate.student.languagesAccessed << pair
+        }
 
         aggregate.instructor.totalReportsGeneratedCount = generator.randomNumberExclusive( 10 )
         aggregate.instructor.totalAssignmentsGeneratedCount = generator.randomNumberExclusive( 10 )

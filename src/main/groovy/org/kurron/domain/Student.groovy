@@ -23,5 +23,7 @@ class Student {
     @JsonProperty( value = 'web-data' )
     PlatformData webData = new PlatformData()
 
+    @JsonProperty( value = 'languages-accessed' )
+    List<LanguagePair> languagesAccessed = new ArrayList<>( 2 )
 
 }
