@@ -34,4 +34,7 @@ class Student {
 
     @JsonProperty( value = 'learning-content' )
     List<LearningContent> learningContent = new ArrayList<>( 2 )
+
+    @JsonProperty( value = 'class-participation' )
+    List<ClassParticipation> classParticipation = new ArrayList<>( 8 )
 }

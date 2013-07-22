@@ -35,6 +35,4 @@ class DailyUserAggregate {
     @JsonProperty( value = 'administrator' )
     Administrator administrator = new Administrator()
 
-    @JsonProperty( value = 'class-participation' )
-    List<ClassParticipation> classParticipation = new ArrayList<>( 8 )
 }

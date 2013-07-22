@@ -62,6 +62,12 @@ class DailyUserAggregateBuilder {
             content.pair = pair
             aggregate.student.learningContent << content
         }
+        3.times {
+            ClassParticipation participation = new ClassParticipation()
+            participation.code = generator.randomHexString()
+            participation.totalLearningTime = generator.randomNumberExclusive( 100 )
+            aggregate.student.classParticipation << participation
+        }
         aggregate.instructor.totalReportsGeneratedCount = generator.randomNumberExclusive( 10 )
         aggregate.instructor.totalAssignmentsGeneratedCount = generator.randomNumberExclusive( 10 )
         aggregate.instructor.totalListsPublishedCount = generator.randomNumberExclusive( 10 )
@@ -74,12 +80,6 @@ class DailyUserAggregateBuilder {
         aggregate.administrator.totalPortalSessionTime = generator.randomNumberExclusive( 100 )
 
 
-        3.times {
-            ClassParticipation participation = new ClassParticipation()
-            participation.code = generator.randomHexString()
-            participation.totalLearningTime = generator.randomNumberExclusive( 100 )
-            aggregate.classParticipation << participation
-        }
         aggregate
     }
 }
