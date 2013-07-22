@@ -8,6 +8,9 @@ import com.fasterxml.jackson.annotation.JsonProperty
  */
 @JsonAutoDetect( getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE, fieldVisibility = JsonAutoDetect.Visibility.NONE )
 class Administrator {
+    @JsonProperty( value = 'administrator-id' )
+    String administratorID
+
     @JsonProperty( value = 'total-reports-generated-count' )
     int totalReportsGeneratedCount
 
