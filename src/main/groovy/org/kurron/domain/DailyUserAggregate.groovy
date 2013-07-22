@@ -33,7 +33,7 @@ class DailyUserAggregate {
     int totalLessonSessionCount
 
     @JsonProperty( value = 'languages-accessed' )
-    List<String> languagesAccessed = new ArrayList<>( 2 )
+    List<LanguagePair> languagesAccessed = new ArrayList<>( 2 )
 
     @JsonProperty( value = 'student' )
     Student student = new Student()

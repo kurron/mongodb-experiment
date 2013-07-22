@@ -23,7 +23,11 @@ class DailyUserAggregateBuilder {
         aggregate.newClassRegistrationCount = generator.randomNumberExclusive( 10 )
         aggregate.totalLessonSessionCount = generator.randomNumberExclusive( 10 )
         2.times {
-            aggregate.languagesAccessed << generator.randomHexString()
+            LanguagePair pair = new LanguagePair()
+            pair.knownCode = generator.randomHexString()
+            pair.learningCode = generator.randomHexString()
+            pair.sessionCount = generator.randomNumberExclusive( 10 )
+            aggregate.languagesAccessed << pair
         }
 
         aggregate.student.studentID = generator.randomHexString()
