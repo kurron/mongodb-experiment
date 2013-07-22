@@ -1,6 +1,7 @@
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializationFeature
+import ClassInformationBuilder
 import spock.lang.Specification
 
 /**
@@ -24,8 +25,9 @@ class JsonSerializerLearningTest extends Specification {
         true
 
         where:
-        builder                     |  unimportant
-        new DailyAggregateBuilder() |  'bob'
-        new UserInformationBuilder()           |  'bob'
+        builder                        |  unimportant
+        new DailyAggregateBuilder()    |  'bob'
+        new UserInformationBuilder()   |  'bob'
+        new ClassInformationBuilder()  |  'bob'
     }
 }
