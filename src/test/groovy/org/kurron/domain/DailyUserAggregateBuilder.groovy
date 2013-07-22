@@ -30,6 +30,21 @@ class DailyUserAggregateBuilder {
         aggregate.student.sustainment.staleItemCount = generator.randomNumberExclusive( 100 )
         aggregate.student.sustainment.totalRefreshmentTime = generator.randomNumberExclusive( 100 )
 
+        aggregate.student.mobileData.downloadedListCount = generator.randomNumberExclusive( 10 )
+        aggregate.student.mobileData.downloadedCourseCountCount = generator.randomNumberExclusive( 10 )
+        aggregate.student.mobileData.sessionCount = generator.randomNumberExclusive( 10 )
+        aggregate.student.mobileData.sessionTime = generator.randomNumberExclusive( 100 )
+
+        aggregate.student.desktopData.downloadedListCount = generator.randomNumberExclusive( 10 )
+        aggregate.student.desktopData.downloadedCourseCountCount = generator.randomNumberExclusive( 10 )
+        aggregate.student.desktopData.sessionCount = generator.randomNumberExclusive( 10 )
+        aggregate.student.desktopData.sessionTime = generator.randomNumberExclusive( 100 )
+
+        aggregate.student.webData.downloadedListCount = generator.randomNumberExclusive( 10 )
+        aggregate.student.webData.downloadedCourseCountCount = generator.randomNumberExclusive( 10 )
+        aggregate.student.webData.sessionCount = generator.randomNumberExclusive( 10 )
+        aggregate.student.webData.sessionTime = generator.randomNumberExclusive( 100 )
+
         aggregate.instructor.totalReportsGeneratedCount = generator.randomNumberExclusive( 10 )
         aggregate.instructor.totalAssignmentsGeneratedCount = generator.randomNumberExclusive( 10 )
         aggregate.instructor.totalListsPublishedCount = generator.randomNumberExclusive( 10 )
@@ -39,20 +54,6 @@ class DailyUserAggregateBuilder {
         aggregate.administrator.totalReportsGeneratedCount = generator.randomNumberExclusive( 10 )
         aggregate.administrator.totalPortalSessionCount = generator.randomNumberExclusive( 10 )
 
-        aggregate.mobileData.downloadedListCount = generator.randomNumberExclusive( 10 )
-        aggregate.mobileData.downloadedCourseCountCount = generator.randomNumberExclusive( 10 )
-        aggregate.mobileData.sessionCount = generator.randomNumberExclusive( 10 )
-        aggregate.mobileData.sessionTime = generator.randomNumberExclusive( 100 )
-
-        aggregate.dektopData.downloadedListCount = generator.randomNumberExclusive( 10 )
-        aggregate.dektopData.downloadedCourseCountCount = generator.randomNumberExclusive( 10 )
-        aggregate.dektopData.sessionCount = generator.randomNumberExclusive( 10 )
-        aggregate.dektopData.sessionTime = generator.randomNumberExclusive( 100 )
-
-        aggregate.webData.downloadedListCount = generator.randomNumberExclusive( 10 )
-        aggregate.webData.downloadedCourseCountCount = generator.randomNumberExclusive( 10 )
-        aggregate.webData.sessionCount = generator.randomNumberExclusive( 10 )
-        aggregate.webData.sessionTime = generator.randomNumberExclusive( 100 )
 
         3.times {
             ClassParticipation participation = new ClassParticipation()

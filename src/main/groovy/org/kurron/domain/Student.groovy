@@ -11,4 +11,14 @@ class Student {
     @JsonProperty( value = 'sustainment' )
     Sustainment sustainment = new Sustainment()
 
+    @JsonProperty( value = 'mobile-data' )
+    PlatformData mobileData = new PlatformData()
+
+    @JsonProperty( value = 'desktop-data' )
+    PlatformData desktopData = new PlatformData()
+
+    @JsonProperty( value = 'web-data' )
+    PlatformData webData = new PlatformData()
+
+
 }

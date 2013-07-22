@@ -47,15 +47,6 @@ class DailyUserAggregate {
     @JsonProperty( value = 'administrator' )
     Administrator administrator = new Administrator()
 
-    @JsonProperty( value = 'mobile-data' )
-    PlatformData mobileData = new PlatformData()
-
-    @JsonProperty( value = 'desktop-data' )
-    PlatformData dektopData = new PlatformData()
-
-    @JsonProperty( value = 'web-data' )
-    PlatformData webData = new PlatformData()
-
     @JsonProperty( value = 'class-participation' )
     List<ClassParticipation> classParticipation = new ArrayList<>( 8 )
 }
