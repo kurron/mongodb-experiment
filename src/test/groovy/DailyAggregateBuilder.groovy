@@ -7,7 +7,7 @@ class DailyAggregateBuilder {
     /**
      * Generates random data.
      */
-    private final RadomDataGenerator generator = new RadomDataGenerator()
+    private final RandomDataGenerator generator = new RandomDataGenerator()
 
     DailyAggregate build() {
         DailyAggregate aggregate = new DailyAggregate()

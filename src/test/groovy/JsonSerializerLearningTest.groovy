@@ -16,7 +16,7 @@ class JsonSerializerLearningTest extends Specification {
 
         when: 'an object is serialized into JSON'
         def sut = builder.build()
-        String json = mapper.writer().writeValueAsString(sut)
+        String json = mapper.writer().writeValueAsString( sut )
 
         then: 'printout JSON'
         println sut.class.simpleName
@@ -26,5 +26,6 @@ class JsonSerializerLearningTest extends Specification {
         where:
         builder                     |  unimportant
         new DailyAggregateBuilder() |  'bob'
+        new UserBuilder()           |  'bob'
     }
 }
