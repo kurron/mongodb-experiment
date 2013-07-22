@@ -38,8 +38,8 @@ class DailyUserAggregate {
     @JsonProperty( value = 'languages-accessed' )
     List<String> languagesAccessed = new ArrayList<>( 2 )
 
-    @JsonProperty( value = 'sustainment' )
-    Sustainment sustainment = new Sustainment()
+    @JsonProperty( value = 'student' )
+    Student student = new Student()
 
     @JsonProperty( value = 'instructor' )
     Instructor instructor = new Instructor()

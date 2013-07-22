@@ -26,9 +26,9 @@ class DailyUserAggregateBuilder {
         2.times {
             aggregate.languagesAccessed << generator.randomHexString()
         }
-        aggregate.sustainment.learnedItemCount = generator.randomNumberExclusive( 10 )
-        aggregate.sustainment.staleItemCount = generator.randomNumberExclusive( 100 )
-        aggregate.sustainment.totalRefreshmentTime = generator.randomNumberExclusive( 100 )
+        aggregate.student.sustainment.learnedItemCount = generator.randomNumberExclusive( 10 )
+        aggregate.student.sustainment.staleItemCount = generator.randomNumberExclusive( 100 )
+        aggregate.student.sustainment.totalRefreshmentTime = generator.randomNumberExclusive( 100 )
 
         aggregate.instructor.totalReportsGeneratedCount = generator.randomNumberExclusive( 10 )
         aggregate.instructor.totalAssignmentsGeneratedCount = generator.randomNumberExclusive( 10 )
