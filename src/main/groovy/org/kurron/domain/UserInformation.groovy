@@ -19,4 +19,7 @@ class UserInformation {
 
     @JsonProperty( value = 'last-logged-in' )
     long lastLogIn
+
+    @JsonProperty( value = 'instructor-flag' )
+    boolean instructorFlag
 }

@@ -76,6 +76,15 @@ class RandomDataGenerator {
      */
     public int randomNumberExclusive( final int maxValue )
     {
-        return generator.nextInt( maxValue );
+        return generator.nextInt( maxValue )
+    }
+
+    /**
+     * Generates a random boolean value.
+     * @return true or false.
+     */
+    public boolean randomBoolean()
+    {
+        return generator.nextBoolean()
     }
 }

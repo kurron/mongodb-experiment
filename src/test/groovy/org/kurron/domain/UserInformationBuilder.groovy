@@ -1,7 +1,4 @@
 package org.kurron.domain
-
-import org.kurron.domain.UserInformation
-
 /**
  * Convenience object builder.
  */
@@ -17,6 +14,7 @@ class UserInformationBuilder {
         user.username = generator.randomHexString()
         user.email = generator.randomEMail()
         user.lastLogIn = generator.randomLong()
+        user.instructorFlag = generator.randomBoolean()
         user
     }
 }
