@@ -11,8 +11,8 @@ class UserInformation {
     @JsonProperty( value = '_id' )
     String id
 
-    @JsonProperty( value = 'username' )
-    String username
+    @JsonProperty( value = 'student-id' )
+    String studentID
 
     @JsonProperty( value = 'email' )
     String email
@@ -22,4 +22,8 @@ class UserInformation {
 
     @JsonProperty( value = 'instructor-flag' )
     boolean instructorFlag
+
+    @JsonProperty( value = 'instructor-id' )
+    String instructorID
+
 }

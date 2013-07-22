@@ -12,7 +12,7 @@ class DailyUserAggregateBuilder {
         DailyUserAggregate aggregate = new DailyUserAggregate()
         aggregate.id = generator.randomObjectId()
         aggregate.dateCode = generator.randomLong()
-        aggregate.username = generator.randomHexString()
+        aggregate.studentID = generator.randomHexString()
         aggregate.node = generator.randomHexString()
         aggregate.organization = generator.randomHexString()
         2.times {
