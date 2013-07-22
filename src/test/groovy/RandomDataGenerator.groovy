@@ -3,7 +3,7 @@ import java.security.SecureRandom
 /**
  * Generates random data suitable for testing scenarios.
  */
-class RandomDataGenerator {
+public class RandomDataGenerator {
 
     /**
      * Legal hex characters.

@@ -23,6 +23,9 @@ class DailyUserAggregate {
     @JsonProperty( value = 'organization' )
     String organization
 
+    @JsonProperty( value = 'school-houses' )
+    List<String> schoolHouses = new ArrayList<>( 2 )
+
     @JsonProperty( value = 'tags' )
     List<String> tags = new ArrayList<>( 2 )
 

@@ -1,7 +1,4 @@
 package org.kurron.domain
-
-import org.kurron.domain.DailyUserAggregate
-
 /**
  * Convenience object builder.
  */
@@ -18,6 +15,9 @@ class DailyUserAggregateBuilder {
         aggregate.username = generator.randomHexString()
         aggregate.node = generator.randomHexString()
         aggregate.organization = generator.randomHexString()
+        2.times {
+            aggregate.schoolHouses << generator.randomHexString()
+        }
         2.times {
             aggregate.tags << generator.randomHexString()
         }
