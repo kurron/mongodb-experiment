@@ -46,6 +46,11 @@ class DailyUserAggregateBuilder {
         aggregate.dektopData.sessionCount = generator.randomNumberExclusive( 10 )
         aggregate.dektopData.sessionTime = generator.randomNumberExclusive( 100 )
 
+        aggregate.webData.downloadedListCount = generator.randomNumberExclusive( 10 )
+        aggregate.webData.downloadedCourseCountCount = generator.randomNumberExclusive( 10 )
+        aggregate.webData.sessionCount = generator.randomNumberExclusive( 10 )
+        aggregate.webData.sessionTime = generator.randomNumberExclusive( 100 )
+
         aggregate
     }
 }

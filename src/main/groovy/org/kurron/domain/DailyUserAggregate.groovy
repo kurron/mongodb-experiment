@@ -46,4 +46,7 @@ class DailyUserAggregate {
 
     @JsonProperty( value = 'desktop-data' )
     PlatformData dektopData = new PlatformData()
+
+    @JsonProperty( value = 'web-data' )
+    PlatformData webData = new PlatformData()
 }
