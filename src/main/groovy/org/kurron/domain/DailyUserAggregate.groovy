@@ -49,4 +49,7 @@ class DailyUserAggregate {
 
     @JsonProperty( value = 'web-data' )
     PlatformData webData = new PlatformData()
+
+    @JsonProperty( value = 'class-participation' )
+    List<ClassParticipation> classParticipation = new ArrayList<>( 8 )
 }

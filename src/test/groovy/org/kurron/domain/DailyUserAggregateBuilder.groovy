@@ -51,6 +51,12 @@ class DailyUserAggregateBuilder {
         aggregate.webData.sessionCount = generator.randomNumberExclusive( 10 )
         aggregate.webData.sessionTime = generator.randomNumberExclusive( 100 )
 
+        3.times {
+            ClassParticipation participation = new ClassParticipation()
+            participation.code = generator.randomHexString()
+            participation.totalLearningTime = generator.randomNumberExclusive( 100 )
+            aggregate.classParticipation << participation
+        }
         aggregate
     }
 }
