@@ -68,6 +68,8 @@ class DailyUserAggregateBuilder {
             participation.totalLearningTime = generator.randomNumberExclusive( 100 )
             aggregate.student.classParticipation << participation
         }
+
+        aggregate.instructor.instructorID = 'TEACHER.' + generator.randomHexString()
         aggregate.instructor.totalReportsGeneratedCount = generator.randomNumberExclusive( 10 )
         aggregate.instructor.totalAssignmentsGeneratedCount = generator.randomNumberExclusive( 10 )
         aggregate.instructor.totalListsPublishedCount = generator.randomNumberExclusive( 10 )
