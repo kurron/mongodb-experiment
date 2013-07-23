@@ -14,6 +14,9 @@ class DailyUserAggregate {
     @JsonProperty( value = 'date-code' )
     long dateCode
 
+    @JsonProperty( value = 'instance')
+    String instance
+
     @JsonProperty( value = 'node' )
     String node
 

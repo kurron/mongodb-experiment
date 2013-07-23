@@ -11,6 +11,7 @@ class DailyUserAggregateBuilder {
     DailyUserAggregate build() {
         DailyUserAggregate aggregate = new DailyUserAggregate()
         aggregate.id = generator.randomObjectId()
+        aggregate.instance = generator.randomInstance()
         aggregate.dateCode = generator.randomLong()
         aggregate.node = generator.randomHexString()
         aggregate.organization = generator.randomHexString()
