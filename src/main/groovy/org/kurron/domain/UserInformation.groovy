@@ -14,6 +14,15 @@ class UserInformation {
     @JsonProperty( value = 'instance')
     String instance
 
+    @JsonProperty( value = 'is-active')
+    Boolean isActive
+
+    @JsonProperty( value = 'date-created')
+    long dateCreated
+
+    @JsonProperty( value = 'date-deleted')
+    long dateDeleted
+
     @JsonProperty( value = 'student-id' )
     String studentID
 
