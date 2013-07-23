@@ -11,6 +11,9 @@ class UserInformation {
     @JsonProperty( value = '_id' )
     String id
 
+    @JsonProperty( value = 'instance')
+    String instance
+
     @JsonProperty( value = 'student-id' )
     String studentID
 

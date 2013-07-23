@@ -11,6 +11,7 @@ class UserInformationBuilder {
     UserInformation build() {
         UserInformation user = new UserInformation()
         user.id = generator.randomObjectId()
+        user.instance = generator.randomInstance()
         user.studentID = generator.randomHexString()
         user.instructorID = generator.randomHexString()
         user.administratorID = generator.randomHexString()
