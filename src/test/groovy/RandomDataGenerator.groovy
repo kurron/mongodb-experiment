@@ -33,6 +33,14 @@ public class RandomDataGenerator {
     }
 
     /**
+     * Randomized object instance.
+     * @return random object instance
+     */
+    String randomInstance() {
+        UUID.randomUUID().toString().toUpperCase()
+    }
+
+    /**
      * Generates an 8 character string of randomized hex values.
      * @return random string.
      */
