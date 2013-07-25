@@ -24,7 +24,6 @@ class DailyUserAggregateBuilder {
 
         aggregate.student.studentID = generator.randomHexString()
         aggregate.student.totalLessonSessionCount = generator.randomNumberExclusive( 10 )
-        aggregate.student.newClassRegistrationCount = generator.randomNumberExclusive( 10 )
         aggregate.student.sustainment.learnedItemCount = generator.randomNumberExclusive( 10 )
         aggregate.student.sustainment.staleItemCount = generator.randomNumberExclusive( 100 )
         aggregate.student.sustainment.totalRefreshmentTime = generator.randomNumberExclusive( 100 )
@@ -83,6 +82,7 @@ class DailyUserAggregateBuilder {
             ClassParticipation participation = new ClassParticipation()
             participation.code = generator.randomHexString()
             participation.totalLearningTime = generator.randomNumberExclusive( 100 )
+            participation.enrolledToday = generator.randomBoolean()
             aggregate.student.classParticipation << participation
         }
 

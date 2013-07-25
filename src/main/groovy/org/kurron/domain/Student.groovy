@@ -23,15 +23,12 @@ class Student {
     @JsonProperty( value = 'web-data' )
     PlatformData webData = new PlatformData()
 
-    @JsonProperty( value = 'new-class-registration-count' )
-    int newClassRegistrationCount
-
     @JsonProperty( value = 'total-lesson-session-count' )
     int totalLessonSessionCount
 
     @JsonProperty( value = 'learning-content' )
     List<LearningContent> learningContent = new ArrayList<>( 2 )
 
-    @JsonProperty( value = 'class-participation' )
+    @JsonProperty( value = 'class-enrollment' )
     List<ClassParticipation> classParticipation = new ArrayList<>( 8 )
 }

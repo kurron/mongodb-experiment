@@ -8,6 +8,9 @@ import com.fasterxml.jackson.annotation.JsonProperty
  */
 @JsonAutoDetect( getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE, fieldVisibility = JsonAutoDetect.Visibility.NONE )
 class ClassParticipation {
+    @JsonProperty( value = 'enrolled-today-flag' )
+    boolean enrolledToday
+
     @JsonProperty( value = 'total-learning-time' )
     int totalLearningTime
 
