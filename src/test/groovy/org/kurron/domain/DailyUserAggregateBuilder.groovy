@@ -49,7 +49,23 @@ class DailyUserAggregateBuilder {
             pair.knownCode = generator.randomHexString()
             pair.learningCode = generator.randomHexString()
             pair.sessionCount = generator.randomNumberExclusive( 10 )
-            aggregate.student.languagesAccessed << pair
+            aggregate.student.mobileData.languagesAccessed << pair
+        }
+
+        2.times {
+            LanguagePair pair = new LanguagePair()
+            pair.knownCode = generator.randomHexString()
+            pair.learningCode = generator.randomHexString()
+            pair.sessionCount = generator.randomNumberExclusive( 10 )
+            aggregate.student.desktopData.languagesAccessed << pair
+        }
+
+        2.times {
+            LanguagePair pair = new LanguagePair()
+            pair.knownCode = generator.randomHexString()
+            pair.learningCode = generator.randomHexString()
+            pair.sessionCount = generator.randomNumberExclusive( 10 )
+            aggregate.student.webData.languagesAccessed << pair
         }
 
         4.times {

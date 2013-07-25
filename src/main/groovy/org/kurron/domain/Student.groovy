@@ -29,9 +29,6 @@ class Student {
     @JsonProperty( value = 'total-lesson-session-count' )
     int totalLessonSessionCount
 
-    @JsonProperty( value = 'languages-accessed' )
-    List<LanguagePair> languagesAccessed = new ArrayList<>( 2 )
-
     @JsonProperty( value = 'learning-content' )
     List<LearningContent> learningContent = new ArrayList<>( 2 )
 

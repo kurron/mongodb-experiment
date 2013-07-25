@@ -19,4 +19,7 @@ class PlatformData {
 
     @JsonProperty( value = 'session-time' )
     int sessionTime
+
+    @JsonProperty( value = 'languages-accessed' )
+    List<LanguagePair> languagesAccessed = new ArrayList<>( 2 )
 }
