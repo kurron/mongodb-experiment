@@ -26,17 +26,22 @@ class DataPopulationLearningTest extends Specification {
             template.dropCollection( DailyUserAggregate )
         }
         template.createCollection( DailyUserAggregate )
-        DailyUserAggregate aggregate = builder.build()
-        template.insert( aggregate )
+
+        1.upto( 100000 ) {
+            log.debug( "Inserting $it" )
+            template.insert( builder.build() )
+        }
 
         then: 'we should find it'
         List<DailyUserAggregate> results = template.findAll( DailyUserAggregate )
         assert !results.empty
         log.debug "Found $results.size in the database"
 
+/*
         results.each {
             log.debug( it.toString() )
         }
+*/
         true
     }
 }
