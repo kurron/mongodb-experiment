@@ -34,4 +34,8 @@ class DataPopulationLearningTestConfiguration {
     public @Bean PersistenceExceptionTranslationPostProcessor persistenceExceptionTranslationPostProcessor() {
         new PersistenceExceptionTranslationPostProcessor()
     }
+
+    public @Bean DailyUserAggregateEventListener dailyUserAggregateEventListener() {
+        new DailyUserAggregateEventListener()
+    }
 }
