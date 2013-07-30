@@ -31,4 +31,19 @@ class Student {
 
     @JsonProperty( value = 'class-enrollment' )
     List<ClassParticipation> classParticipation = new ArrayList<>( 8 )
+
+
+    @Override
+    public java.lang.String toString() {
+        return "Student{" +
+                "studentID='" + studentID + '\'' +
+                ", sustainment=" + sustainment +
+                ", mobileData=" + mobileData +
+                ", desktopData=" + desktopData +
+                ", webData=" + webData +
+                ", totalLessonSessionCount=" + totalLessonSessionCount +
+                ", learningContent=" + learningContent +
+                ", classParticipation=" + classParticipation +
+                '}';
+    }
 }

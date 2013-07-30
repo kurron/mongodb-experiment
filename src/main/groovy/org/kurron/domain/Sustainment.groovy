@@ -16,4 +16,14 @@ class Sustainment {
 
     @JsonProperty( value = 'total-refreshment-time' )
     int totalRefreshmentTime
+
+
+    @Override
+    public java.lang.String toString() {
+        return "Sustainment{" +
+                "learnedItemCount=" + learnedItemCount +
+                ", staleItemCount=" + staleItemCount +
+                ", totalRefreshmentTime=" + totalRefreshmentTime +
+                '}';
+    }
 }

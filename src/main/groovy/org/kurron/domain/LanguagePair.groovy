@@ -16,4 +16,14 @@ class LanguagePair {
 
     @JsonProperty( value = 'session-count' )
     int sessionCount
+
+
+    @Override
+    public java.lang.String toString() {
+        return "LanguagePair{" +
+                "knownCode='" + knownCode + '\'' +
+                ", learningCode='" + learningCode + '\'' +
+                ", sessionCount=" + sessionCount +
+                '}';
+    }
 }

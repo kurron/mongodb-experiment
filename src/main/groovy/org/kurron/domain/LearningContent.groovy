@@ -16,4 +16,14 @@ class LearningContent {
 
     @JsonProperty( value = 'language-pair' )
     LanguagePair pair
+
+
+    @Override
+    public java.lang.String toString() {
+        return "LearningContent{" +
+                "type='" + type + '\'' +
+                ", title='" + title + '\'' +
+                ", pair=" + pair +
+                '}';
+    }
 }

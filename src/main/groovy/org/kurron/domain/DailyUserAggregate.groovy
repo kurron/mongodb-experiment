@@ -42,4 +42,20 @@ class DailyUserAggregate {
     @JsonProperty( value = 'administrator' )
     Administrator administrator = new Administrator()
 
+
+    @Override
+    public java.lang.String toString() {
+        return "DailyUserAggregate{" +
+                "id='" + id + '\'' +
+                ", dateCode=" + dateCode +
+                ", instance='" + instance + '\'' +
+                ", node='" + node + '\'' +
+                ", organization='" + organization + '\'' +
+                ", schoolHouses=" + schoolHouses +
+                ", tags=" + tags +
+                ", student=" + student +
+                ", instructor=" + instructor +
+                ", administrator=" + administrator +
+                '}';
+    }
 }

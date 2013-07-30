@@ -35,7 +35,7 @@ class DataPopulationLearningTest extends Specification {
         log.debug "Found $results.size in the database"
 
         results.each {
-            println it
+            log.debug( it.toString() )
         }
         true
     }

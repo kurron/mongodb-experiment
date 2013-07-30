@@ -16,4 +16,14 @@ class ClassParticipation {
 
     @JsonProperty( value = 'class-code' )
     String code
+
+
+    @Override
+    public java.lang.String toString() {
+        return "ClassParticipation{" +
+                "enrolledToday=" + enrolledToday +
+                ", totalLearningTime=" + totalLearningTime +
+                ", code='" + code + '\'' +
+                '}';
+    }
 }

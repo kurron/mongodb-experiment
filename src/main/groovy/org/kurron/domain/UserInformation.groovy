@@ -44,4 +44,22 @@ class UserInformation {
     @JsonProperty( value = 'instructor-id' )
     String instructorID
 
+
+    @Override
+    public java.lang.String toString() {
+        return "UserInformation{" +
+                "id='" + id + '\'' +
+                ", instance='" + instance + '\'' +
+                ", isActive=" + isActive +
+                ", dateCreated=" + dateCreated +
+                ", dateDeleted=" + dateDeleted +
+                ", studentID='" + studentID + '\'' +
+                ", email='" + email + '\'' +
+                ", lastLogInAsStudent=" + lastLogInAsStudent +
+                ", lastLogInAsInstructor=" + lastLogInAsInstructor +
+                ", lastLogInAsAdministrator=" + lastLogInAsAdministrator +
+                ", administratorID='" + administratorID + '\'' +
+                ", instructorID='" + instructorID + '\'' +
+                '}';
+    }
 }

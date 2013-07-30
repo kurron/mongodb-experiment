@@ -19,4 +19,15 @@ class ClassInformation {
 
     @JsonProperty( value = 'instructors' )
     List<String> instructors = new ArrayList<>( 2 )
+
+
+    @Override
+    public java.lang.String toString() {
+        return "ClassInformation{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", code='" + code + '\'' +
+                ", instructors=" + instructors +
+                '}';
+    }
 }

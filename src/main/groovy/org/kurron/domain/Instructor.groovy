@@ -28,4 +28,18 @@ class Instructor {
 
     @JsonProperty( value = 'total-instructor-portal-session-time' )
     int totalInstructorPortalSessionTime
+
+
+    @Override
+    public java.lang.String toString() {
+        return "Instructor{" +
+                "instructorID='" + instructorID + '\'' +
+                ", totalReportsGeneratedCount=" + totalReportsGeneratedCount +
+                ", totalAssignmentsGeneratedCount=" + totalAssignmentsGeneratedCount +
+                ", totalListsPublishedCount=" + totalListsPublishedCount +
+                ", totalClassesCreatedCount=" + totalClassesCreatedCount +
+                ", totalInstructorPortalSessionCount=" + totalInstructorPortalSessionCount +
+                ", totalInstructorPortalSessionTime=" + totalInstructorPortalSessionTime +
+                '}';
+    }
 }

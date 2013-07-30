@@ -22,4 +22,16 @@ class PlatformData {
 
     @JsonProperty( value = 'languages-accessed' )
     List<LanguagePair> languagesAccessed = new ArrayList<>( 2 )
+
+
+    @Override
+    public java.lang.String toString() {
+        return "PlatformData{" +
+                "downloadedListCount=" + downloadedListCount +
+                ", downloadedCourseCountCount=" + downloadedCourseCountCount +
+                ", sessionCount=" + sessionCount +
+                ", sessionTime=" + sessionTime +
+                ", languagesAccessed=" + languagesAccessed +
+                '}';
+    }
 }

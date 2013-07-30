@@ -19,4 +19,15 @@ class Administrator {
 
     @JsonProperty( value = 'total-admin-portal-session-time' )
     int totalPortalSessionTime
+
+
+    @Override
+    public java.lang.String toString() {
+        return "Administrator{" +
+                "administratorID='" + administratorID + '\'' +
+                ", totalReportsGeneratedCount=" + totalReportsGeneratedCount +
+                ", totalPortalSessionCount=" + totalPortalSessionCount +
+                ", totalPortalSessionTime=" + totalPortalSessionTime +
+                '}';
+    }
 }
