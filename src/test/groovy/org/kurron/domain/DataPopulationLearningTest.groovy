@@ -1,5 +1,6 @@
 package org.kurron.domain
 
+import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.mongodb.core.MongoOperations
 import org.springframework.test.context.ContextConfiguration
@@ -8,6 +9,7 @@ import spock.lang.Specification
 /**
  * A learning test just to see how MongoDB might handle large amounts of data.
  */
+@Slf4j
 @ContextConfiguration( classes = DataPopulationLearningTestConfiguration )
 class DataPopulationLearningTest extends Specification {
     @Autowired
@@ -30,7 +32,7 @@ class DataPopulationLearningTest extends Specification {
         then: 'we should find it'
         List<DailyUserAggregate> results = template.findAll( DailyUserAggregate )
         assert !results.empty
-        println "Found $results.size in the database"
+        log.debug "Found $results.size in the database"
 
         results.each {
             println it
