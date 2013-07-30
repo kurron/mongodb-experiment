@@ -10,6 +10,7 @@ ext {
     spockVersion = '0.7-groovy-2.0'
     jacksonVersion = '2.2.1'
     jsonPathVersion = '0.8.1'
+    mongoDbDriverVersion = '2.11.1'
 }
 
 repositories {
@@ -38,6 +39,7 @@ dependencies {
     compile "org.slf4j:slf4j-api:${slf4jVersion}"
     compile "org.slf4j:slf4j-ext:${slf4jVersion}"
     compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
+    compile "org.mongodb:mongo-java-driver:${mongoDbDriverVersion}"
 
     runtime "org.slf4j:jul-to-slf4j:${slf4jVersion}"
     runtime "org.slf4j:log4j-over-slf4j:${slf4jVersion}"
@@ -53,4 +55,4 @@ dependencies {
 task wrapper(type: Wrapper) {
     gradleVersion = '1.6'
 }
-defaultTasks 'projectreport', 'build'
+defaultTasks 'clean', 'projectreport', 'build'
