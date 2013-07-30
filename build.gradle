@@ -11,6 +11,8 @@ ext {
     jacksonVersion = '2.2.1'
     jsonPathVersion = '0.8.1'
     mongoDbDriverVersion = '2.11.1'
+    springDataMongoDbVersion = '1.3.0.M1'
+    springFrameworkVersion = '3.1.4.RELEASE'
 }
 
 repositories {
@@ -26,12 +28,11 @@ repositories {
     }
 }
 
-configurations {
-    all*.exclude group: 'commons-logging'
-    all*.exclude group: 'log4j'
-    all*.exclude group: 'slf4j'
-    all*.exclude group: 'org.hamcrest'
-    all*.exclude module: 'junit-dep'
+configurations.all {
+    exclude group: 'commons-logging'
+    exclude group: 'log4j'
+    exclude module: 'junit-dep'
+    exclude module: 'hamcrest-core'
 }
 
 dependencies {
@@ -40,16 +41,19 @@ dependencies {
     compile "org.slf4j:slf4j-ext:${slf4jVersion}"
     compile "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
     compile "org.mongodb:mongo-java-driver:${mongoDbDriverVersion}"
+    compile "org.springframework.data:spring-data-mongodb:${springDataMongoDbVersion}"
+    compile "org.slf4j:jul-to-slf4j:${slf4jVersion}"
+    compile "org.slf4j:log4j-over-slf4j:${slf4jVersion}"
+    compile "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
 
-    runtime "org.slf4j:jul-to-slf4j:${slf4jVersion}"
-    runtime "org.slf4j:log4j-over-slf4j:${slf4jVersion}"
-    runtime "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
     runtime "ch.qos.logback:logback-core:${logbackVersion}"
     runtime "ch.qos.logback:logback-classic:${logbackVersion}"
 
     testCompile "junit:junit:${junitVersion}"
     testCompile "org.hamcrest:hamcrest-all:${hamcrestVersion}"
     testCompile "org.spockframework:spock-core:${spockVersion}"
+    testCompile "org.spockframework:spock-spring:${spockVersion}"
+    testCompile "org.springframework:spring-test:${springFrameworkVersion}"
 }
 
 task wrapper(type: Wrapper) {
