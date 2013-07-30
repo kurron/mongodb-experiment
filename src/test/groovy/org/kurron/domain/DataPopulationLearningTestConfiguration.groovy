@@ -7,6 +7,6 @@ import org.springframework.context.annotation.ImportResource
  * Spring context for the learning test.
  */
 @Configuration
-//@ImportResource( 'classpath:META-INF/spring/profile-context.xml' )
+@ImportResource( 'classpath:/org/kurron/domain/DataPopulationLearningTest-context.xml' )
 class DataPopulationLearningTestConfiguration {
 }
