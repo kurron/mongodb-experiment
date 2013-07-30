@@ -11,24 +11,24 @@ import spock.lang.Specification
 @ContextConfiguration( classes = DataPopulationLearningTestConfiguration )
 class DataPopulationLearningTest extends Specification {
     @Autowired
-    MongoOperations mongoOperations
+    MongoOperations template
 
     def 'import data'()
     {
         given: 'a valid MongoDB template'
-        assert mongoOperations != null
+        assert template != null
         DailyUserAggregateBuilder builder = new DailyUserAggregateBuilder()
 
         when: 'an object is inserted into the database'
-        if ( mongoOperations.collectionExists( DailyUserAggregate ) ) {
-            mongoOperations.dropCollection( DailyUserAggregate )
+        if ( template.collectionExists( DailyUserAggregate ) ) {
+            template.dropCollection( DailyUserAggregate )
         }
-        mongoOperations.createCollection( DailyUserAggregate )
+        template.createCollection( DailyUserAggregate )
         DailyUserAggregate aggregate = builder.build()
-        mongoOperations.insert( aggregate )
+        template.insert( aggregate )
 
         then: 'we should find it'
-        List<DailyUserAggregate> results = mongoOperations.findAll( DailyUserAggregate )
+        List<DailyUserAggregate> results = template.findAll( DailyUserAggregate )
         assert !results.empty
         println "Found $results.size in the database"
 

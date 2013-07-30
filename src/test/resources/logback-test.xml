@@ -1,0 +1,13 @@
+<configuration debug="true">
+    <property name="MESSAGE_FORMAT"
+              value="%1(%.-1level) %35.35logger{0} %message %throwable{short}%n"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${MESSAGE_FORMAT}</pattern>
+        </encoder>
+    </appender>
+    <root level="DEBUG">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
