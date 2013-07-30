@@ -27,7 +27,7 @@ class DataPopulationLearningTest extends Specification {
         }
         template.createCollection( DailyUserAggregate )
 
-        1.upto( 100000 ) {
+        1.upto( 100 ) {
             log.debug( "Inserting $it" )
             template.insert( builder.build() )
         }

@@ -1,6 +1,7 @@
 package org.kurron.domain
 
 import com.mongodb.Mongo
+import com.mongodb.WriteConcern
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.ImportResource
@@ -8,6 +9,7 @@ import org.springframework.dao.annotation.PersistenceExceptionTranslationPostPro
 import org.springframework.data.mongodb.core.MongoFactoryBean
 import org.springframework.data.mongodb.core.MongoOperations
 import org.springframework.data.mongodb.core.MongoTemplate
+import org.springframework.data.mongodb.core.WriteResultChecking
 
 /**
  * Spring context for the learning test.
@@ -17,7 +19,10 @@ import org.springframework.data.mongodb.core.MongoTemplate
 @ImportResource( 'classpath:/org/kurron/domain/DataPopulationLearningTest-context.xml' )
 class DataPopulationLearningTestConfiguration {
     public @Bean MongoOperations mongoTemplate(Mongo mongo) {
-        new MongoTemplate( mongo, 'test' )
+        MongoTemplate template = new MongoTemplate(mongo, 'test')
+        template.writeResultChecking = WriteResultChecking.EXCEPTION
+        //template.writeConcern = WriteConcern.JOURNALED
+        template
     }
 
     public @Bean MongoFactoryBean mongo() {
