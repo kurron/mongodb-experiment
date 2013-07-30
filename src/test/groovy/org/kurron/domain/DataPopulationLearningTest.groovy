@@ -6,7 +6,7 @@ import spock.lang.Specification
 /**
  * A learning test just to see how MongoDB might handle large amounts of data.
  */
-@ContextConfiguration( locations = ['classpath:/org/kurron/domain/DataPopulationLearningTest-context.xml'] )
+@ContextConfiguration( classes = DataPopulationLearningTestConfiguration )
 class DataPopulationLearningTest extends Specification {
     def 'import data'()
     {
