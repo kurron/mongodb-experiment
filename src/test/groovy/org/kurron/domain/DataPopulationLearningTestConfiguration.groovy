@@ -22,7 +22,7 @@ class DataPopulationLearningTestConfiguration {
 
     public @Bean MongoFactoryBean mongo() {
         MongoFactoryBean mongo = new MongoFactoryBean();
-        mongo.host = 'mongo'
+        mongo.host = 'mongo-secondary'
         return mongo
     }
 

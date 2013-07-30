@@ -2,12 +2,16 @@ package org.kurron.domain
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect
 import com.fasterxml.jackson.annotation.JsonProperty
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 
 /**
  * Information about a user's daily activity in the system.
  */
 @JsonAutoDetect( getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE, fieldVisibility = JsonAutoDetect.Visibility.NONE )
+@Document
 class DailyUserAggregate {
+    @Id
     @JsonProperty( value = '_id' )
     String id
 
