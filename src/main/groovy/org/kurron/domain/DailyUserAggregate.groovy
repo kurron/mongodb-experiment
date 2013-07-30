@@ -3,6 +3,7 @@ package org.kurron.domain
 import com.fasterxml.jackson.annotation.JsonAutoDetect
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.index.Indexed
 import org.springframework.data.mongodb.core.mapping.Document
 
 /**
@@ -16,15 +17,19 @@ class DailyUserAggregate {
     String id
 
     @JsonProperty( value = 'date-code' )
+    @Indexed
     long dateCode
 
     @JsonProperty( value = 'instance')
+    @Indexed
     String instance
 
     @JsonProperty( value = 'node' )
+    @Indexed
     String node
 
     @JsonProperty( value = 'organization' )
+    @Indexed
     String organization
 
     @JsonProperty( value = 'school-houses' )
