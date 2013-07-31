@@ -6,6 +6,9 @@ import org.springframework.data.mongodb.core.MongoOperations
 import org.springframework.data.mongodb.core.query.Query
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Specification
+
+import java.security.SecureRandom
+
 import static org.springframework.data.mongodb.core.query.Criteria.*
 
 /**
@@ -15,7 +18,9 @@ import static org.springframework.data.mongodb.core.query.Criteria.*
 @ContextConfiguration( classes = DataPopulationLearningTestConfiguration )
 class DataPopulationLearningTest extends Specification {
 
-    private static final String NODE_NAME = 'ONE'
+    private static final String[] choices = ['ONE', 'TWO', 'THREE', 'FOUR']
+
+    private static final Random random = new SecureRandom()
 
     @Autowired
     MongoOperations template
@@ -33,14 +38,15 @@ class DataPopulationLearningTest extends Specification {
         template.createCollection( DailyUserAggregate )
 
         when: 'data is inserted into the database'
-        final int NUMBER_OF_USERS = 1000
+        final int NUMBER_OF_USERS = 2
         final int NUMBER_OF_YEARS = 10
         final int NUMBER_OF_DAYS = 365
         log.debug( "Creating $NUMBER_OF_USERS users" )
         1.upto( NUMBER_OF_USERS ) { student ->
             DailyUserAggregate data = builder.build()
-            data.node = NODE_NAME
-            data.organization = 'ONE'
+            data.node = randomElement( choices )
+            data.organization = randomElement( choices )
+            data.instance = randomElement( choices )
             data.student.totalLessonSessionCount = 1
             1.upto( NUMBER_OF_YEARS ) { year ->
                 1.upto( NUMBER_OF_DAYS ) { day ->
@@ -57,8 +63,11 @@ class DataPopulationLearningTest extends Specification {
         }
 
         then: 'we should be able to count the inserted documents'
-        long count = template.count( new Query( where( 'node' ).is( NODE_NAME ) ), DailyUserAggregate )
+        long count = template.count( new Query( where( 'node' ).is( 'TWO' ) ), DailyUserAggregate )
         log.info "Found $count in the database"
-        assert count == NUMBER_OF_USERS * NUMBER_OF_YEARS * NUMBER_OF_DAYS
+    }
+
+    String randomElement( String [] collection ) {
+          collection[random.nextInt( collection.size())]
     }
 }
