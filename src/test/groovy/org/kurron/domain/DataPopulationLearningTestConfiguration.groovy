@@ -27,7 +27,7 @@ class DataPopulationLearningTestConfiguration {
 
     public @Bean MongoFactoryBean mongo() {
         MongoFactoryBean mongo = new MongoFactoryBean();
-        mongo.host = 'mongo-secondary'
+        mongo.host = 'mongo'
         return mongo
     }
 
