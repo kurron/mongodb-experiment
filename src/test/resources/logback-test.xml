@@ -8,7 +8,7 @@
         </encoder>
     </appender>
     <logger name="org.springframework.data.mongodb.core.MongoTemplate" level="WARN"/>
-    <logger name="org.kurron" level="ALL"/>
+    <logger name="org.kurron" level="INFO"/>
     <root level="WARN">
         <appender-ref ref="CONSOLE"/>
     </root>
