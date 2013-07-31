@@ -7,8 +7,9 @@
             <pattern>${MESSAGE_FORMAT}</pattern>
         </encoder>
     </appender>
-    <logger name="org.springframework.data.mongodb.core.MongoTemplate" level="ALL"/>
-    <root level="DEBUG">
+    <logger name="org.springframework.data.mongodb.core.MongoTemplate" level="WARN"/>
+    <logger name="org.kurron" level="ALL"/>
+    <root level="WARN">
         <appender-ref ref="CONSOLE"/>
     </root>
 </configuration>

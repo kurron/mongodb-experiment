@@ -27,9 +27,24 @@ class DataPopulationLearningTest extends Specification {
         }
         template.createCollection( DailyUserAggregate )
 
-        1.upto( 100 ) {
-            log.debug( "Inserting $it" )
-            template.insert( builder.build() )
+        final int NUMBER_OF_USERS = 1
+        final int NUMBER_OF_YEARS = 2
+        final int NUMBER_OF_DAYS = 365
+        log.debug( "Creating $NUMBER_OF_USERS users" )
+        1.upto( NUMBER_OF_USERS ) {
+            log.debug( "Creating $NUMBER_OF_YEARS years" )
+            DailyUserAggregate data = builder.build()
+            data.student.totalLessonSessionCount = 1
+            1.upto( NUMBER_OF_YEARS ) { year ->
+                log.debug( "Creating $NUMBER_OF_DAYS days" )
+                1.upto( NUMBER_OF_DAYS ) { day ->
+                    data.dateCode = day + (NUMBER_OF_DAYS * (year - 1))
+                    data.id = UUID.randomUUID()
+                    log.debug( "Date code for year $year day $day is $data.dateCode" )
+                    log.info( "Inserting student $data.student.studentID for day $data.dateCode into database as record $data.id" )
+                    template.insert( data )
+                }
+            }
         }
 
         then: 'we should find it'
