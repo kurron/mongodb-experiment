@@ -14,6 +14,9 @@ import static org.springframework.data.mongodb.core.query.Criteria.*
 @Slf4j
 @ContextConfiguration( classes = DataPopulationLearningTestConfiguration )
 class DataPopulationLearningTest extends Specification {
+
+    private static final String NODE_NAME = 'ONE'
+
     @Autowired
     MongoOperations template
 
@@ -30,13 +33,13 @@ class DataPopulationLearningTest extends Specification {
         template.createCollection( DailyUserAggregate )
 
         when: 'data is inserted into the database'
-        final int NUMBER_OF_USERS = 10
+        final int NUMBER_OF_USERS = 1000
         final int NUMBER_OF_YEARS = 10
         final int NUMBER_OF_DAYS = 365
         log.debug( "Creating $NUMBER_OF_USERS users" )
         1.upto( NUMBER_OF_USERS ) { student ->
             DailyUserAggregate data = builder.build()
-            data.node = 'ONE'
+            data.node = NODE_NAME
             data.organization = 'ONE'
             data.student.totalLessonSessionCount = 1
             1.upto( NUMBER_OF_YEARS ) { year ->
@@ -44,14 +47,17 @@ class DataPopulationLearningTest extends Specification {
                     data.dateCode = day + (NUMBER_OF_DAYS * (year - 1))
                     data.id = UUID.randomUUID()
                     log.debug( "Date code for year $year day $day is $data.dateCode" )
-                    log.info( "Inserting student $student for year $year day $day into database as record $data.id" )
+                    if ( 0 == day % 10 ) {
+                        log.info( "Inserting student $student for year $year day $day into database as record $data.id" )
+
+                    }
                     template.insert( data )
                 }
             }
         }
 
         then: 'we should be able to count the inserted documents'
-        long count = template.count( new Query( where( 'node' ).is( 'ONE' ) ), DailyUserAggregate )
+        long count = template.count( new Query( where( 'node' ).is( NODE_NAME ) ), DailyUserAggregate )
         log.info "Found $count in the database"
         assert count == NUMBER_OF_USERS * NUMBER_OF_YEARS * NUMBER_OF_DAYS
     }
