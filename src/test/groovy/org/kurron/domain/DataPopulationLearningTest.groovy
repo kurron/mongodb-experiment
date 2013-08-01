@@ -2,7 +2,9 @@ package org.kurron.domain
 
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.core.MongoOperations
+import org.springframework.data.mongodb.core.index.Index
 import org.springframework.data.mongodb.core.query.Query
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Ignore
@@ -38,6 +40,9 @@ class DataPopulationLearningTest extends Specification {
             template.dropCollection( DailyUserAggregate )
         }
         template.createCollection( DailyUserAggregate )
+
+        and: 'a valid indexing scheme'
+        template.indexOps( DailyUserAggregate ).ensureIndex( new Index().on( 'instance', Sort.Direction.ASC ).on( 'node', Sort.Direction.ASC ).on( 'organization', Sort.Direction.ASC ).on( 'date-code', Sort.Direction.ASC ) )
 
         when: 'data is inserted into the database'
         final int NUMBER_OF_USERS = 2

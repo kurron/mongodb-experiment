@@ -3,7 +3,8 @@ package org.kurron.domain
 import com.fasterxml.jackson.annotation.JsonAutoDetect
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
-import org.springframework.data.mongodb.core.index.Indexed
+import org.springframework.data.mongodb.core.index.CompoundIndex
+import org.springframework.data.mongodb.core.index.CompoundIndexes
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field
 
@@ -12,6 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Field
  */
 @JsonAutoDetect( getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE, fieldVisibility = JsonAutoDetect.Visibility.NONE )
 @Document
+@CompoundIndexes([ @CompoundIndex( name = 'node-instance-organization-date-index', def = "{'instance': 1, 'node':1, 'organization':1, 'date-code':1}" ) ])
 class DailyUserAggregate {
     @Id
     @JsonProperty( value = '_id' )
@@ -20,22 +22,18 @@ class DailyUserAggregate {
 
     @JsonProperty( value = 'date-code' )
     @Field( value = 'date-code' )
-    @Indexed
     long dateCode
 
     @JsonProperty( value = 'instance')
     @Field( value = 'instance')
-    @Indexed
     String instance
 
     @JsonProperty( value = 'node' )
     @Field( value = 'node' )
-    @Indexed
     String node
 
     @JsonProperty( value = 'organization' )
     @Field( value = 'organization' )
-    @Indexed
     String organization
 
     @JsonProperty( value = 'school-houses' )
