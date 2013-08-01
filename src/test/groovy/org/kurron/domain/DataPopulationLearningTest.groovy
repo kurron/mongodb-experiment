@@ -1,8 +1,13 @@
 package org.kurron.domain
 
+import com.mongodb.AggregationOutput
+import com.mongodb.BasicDBObject
+import com.mongodb.CommandResult
+import com.mongodb.DBObject
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
+import org.springframework.data.mongodb.MongoCollectionUtils
 import org.springframework.data.mongodb.core.MongoOperations
 import org.springframework.data.mongodb.core.index.Index
 import org.springframework.data.mongodb.core.query.Query
@@ -45,7 +50,7 @@ class DataPopulationLearningTest extends Specification {
         template.indexOps( DailyUserAggregate ).ensureIndex( new Index().on( 'instance', Sort.Direction.ASC ).on( 'node', Sort.Direction.ASC ).on( 'organization', Sort.Direction.ASC ).on( 'date-code', Sort.Direction.ASC ) )
 
         when: 'data is inserted into the database'
-        final int NUMBER_OF_USERS = 2
+        final int NUMBER_OF_USERS = 100
         final int NUMBER_OF_YEARS = 10
         final int NUMBER_OF_DAYS = 365
         log.debug( "Creating $NUMBER_OF_USERS users" )
@@ -72,6 +77,27 @@ class DataPopulationLearningTest extends Specification {
         then: 'we should be able to count the inserted documents'
         long count = template.count( new Query( where( 'node' ).is( 'TWO' ) ), DailyUserAggregate )
         log.info "Found $count in the database"
+    }
+
+    def 'execute aggregation'()
+    {
+        given: 'a valid MongoDB template'
+        assert template != null
+
+        and: 'a valid collection'
+        assert template.collectionExists( DailyUserAggregate )
+
+        when: 'aggregation job is run'
+        String collectionName = MongoCollectionUtils.getPreferredCollectionName( DailyUserAggregate )
+        DBObject match = new BasicDBObject( '$match', new BasicDBObject( 'instance', 'ONE' ).append( 'node', 'ONE' ).append( 'organization', 'TWO' ) )
+        DBObject groupFields = new BasicDBObject( '_id', '$node').append( 'totalSessionCount', new BasicDBObject( '$sum', '$student.totalLessonSessionCount') )
+        DBObject group = new BasicDBObject( '$group', groupFields )
+        AggregationOutput aggregate = template.getCollection(collectionName).aggregate(match, group)
+
+        then: 'we should a sum of the session counts'
+        assert aggregate != null
+        assert aggregate.commandResult.ok()
+        log.info( aggregate.toString() )
     }
 
     String randomElement( String [] collection ) {
