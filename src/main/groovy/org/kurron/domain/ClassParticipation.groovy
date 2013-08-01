@@ -2,6 +2,7 @@ package org.kurron.domain
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect
 import com.fasterxml.jackson.annotation.JsonProperty
+import org.springframework.data.mongodb.core.mapping.Field
 
 /**
  * Information about a student's participation in a class.
@@ -9,17 +10,19 @@ import com.fasterxml.jackson.annotation.JsonProperty
 @JsonAutoDetect( getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE, fieldVisibility = JsonAutoDetect.Visibility.NONE )
 class ClassParticipation {
     @JsonProperty( value = 'enrolled-today-flag' )
+    @Field( value = 'enrolled-today-flag' )
     boolean enrolledToday
 
     @JsonProperty( value = 'total-learning-time' )
+    @Field( value = 'total-learning-time' )
     int totalLearningTime
 
     @JsonProperty( value = 'class-code' )
+    @Field( value = 'class-code' )
     String code
 
-
     @Override
-    public java.lang.String toString() {
+    public String toString() {
         return "ClassParticipation{" +
                 "enrolledToday=" + enrolledToday +
                 ", totalLearningTime=" + totalLearningTime +
