@@ -2,7 +2,6 @@ package org.kurron.domain
 
 import com.mongodb.AggregationOutput
 import com.mongodb.BasicDBObject
-import com.mongodb.CommandResult
 import com.mongodb.DBObject
 import groovy.util.logging.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
@@ -143,7 +142,7 @@ class DataPopulationLearningTest extends Specification {
         when: 'learner activity report is run'
         // start date, end date, school house, class
         String collectionName = MongoCollectionUtils.getPreferredCollectionName( DailyUserAggregate )
-        DBObject match = new BasicDBObject( '$match', new BasicDBObject( 'instance', 'ONE' ).append( 'node', 'ONE' ).append( 'organization', 'ONE' ).append( 'school-houses', 'ONE' ) )
+        DBObject match = new BasicDBObject( '$match', new BasicDBObject( 'instance', 'ONE' ).append( 'node', 'ONE' ).append( 'organization', 'ONE' ).append( 'school-houses', 'ONE' ).append( 'date-code', new BasicDBObject( '$gte', 1 ).append( '$lte', 365 )) )
         DBObject groupFields = new BasicDBObject( '_id', '$node').append( 'totalSessionCount', new BasicDBObject( '$sum', '$student.total-lesson-session-count') )
         DBObject group = new BasicDBObject( '$group', groupFields )
         AggregationOutput aggregate = template.getCollection(collectionName).aggregate(match, group)
