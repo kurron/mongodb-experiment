@@ -100,6 +100,60 @@ class DataPopulationLearningTest extends Specification {
         log.info( aggregate.toString() )
     }
 
+    def 'execute learner activity report'()
+    {
+        given: 'a valid MongoDB template'
+        assert template != null
+
+        if ( template.collectionExists( DailyUserAggregate ) ) {
+            template.dropCollection( DailyUserAggregate )
+        }
+        template.createCollection( DailyUserAggregate )
+
+        and: 'a valid indexing scheme'
+        template.indexOps( DailyUserAggregate ).ensureIndex( new Index().on( 'instance', Sort.Direction.ASC ).on( 'node', Sort.Direction.ASC ).on( 'organization', Sort.Direction.ASC ).on( 'date-code', Sort.Direction.ASC ).on( 'school-houses', Sort.Direction.ASC ) )
+
+        and: 'a known data set'
+        final int NUMBER_OF_USERS = 2
+        final int NUMBER_OF_YEARS = 2
+        final int NUMBER_OF_DAYS = 365
+        log.debug( "Creating $NUMBER_OF_USERS users" )
+        DailyUserAggregateBuilder builder = new DailyUserAggregateBuilder()
+        1.upto( NUMBER_OF_USERS ) { student ->
+            DailyUserAggregate data = builder.build()
+            data.node = 'ONE'
+            data.organization = 'ONE'
+            data.instance = 'ONE'
+            data.schoolHouses = ['ONE']
+            data.student.totalLessonSessionCount = 1
+            1.upto( NUMBER_OF_YEARS ) { year ->
+                1.upto( NUMBER_OF_DAYS ) { day ->
+                    data.dateCode = day + (NUMBER_OF_DAYS * (year - 1))
+                    data.id = UUID.randomUUID()
+                    log.debug( "Date code for year $year day $day is $data.dateCode" )
+                    if ( 0 == day % 10 ) {
+                        log.info( "Inserting student $student for year $year day $day into database as record $data.id" )
+
+                    }
+                    template.insert( data )
+                }
+            }
+        }
+
+        when: 'learner activity report is run'
+        // start date, end date, school house, class
+        String collectionName = MongoCollectionUtils.getPreferredCollectionName( DailyUserAggregate )
+        DBObject match = new BasicDBObject( '$match', new BasicDBObject( 'instance', 'ONE' ).append( 'node', 'ONE' ).append( 'organization', 'ONE' ).append( 'school-houses', 'ONE' ) )
+        DBObject groupFields = new BasicDBObject( '_id', '$node').append( 'totalSessionCount', new BasicDBObject( '$sum', '$student.total-lesson-session-count') )
+        DBObject group = new BasicDBObject( '$group', groupFields )
+        AggregationOutput aggregate = template.getCollection(collectionName).aggregate(match, group)
+
+        then: 'we should have a valid report'
+        assert aggregate != null
+        assert aggregate.commandResult.ok()
+        log.info( aggregate.toString() )
+    }
+
     String randomElement( String [] collection ) {
           collection[random.nextInt( collection.size())]
     }

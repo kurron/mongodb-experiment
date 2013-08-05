@@ -21,7 +21,7 @@ class DataPopulationLearningTestConfiguration {
     public @Bean MongoOperations mongoTemplate(Mongo mongo) {
         MongoTemplate template = new MongoTemplate(mongo, 'test')
         template.writeResultChecking = WriteResultChecking.EXCEPTION
-        //template.writeConcern = WriteConcern.JOURNALED
+        template.writeConcern = WriteConcern.JOURNALED
         template
     }
 
