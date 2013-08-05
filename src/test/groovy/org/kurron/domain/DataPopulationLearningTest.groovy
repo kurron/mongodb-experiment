@@ -90,7 +90,7 @@ class DataPopulationLearningTest extends Specification {
         when: 'aggregation job is run'
         String collectionName = MongoCollectionUtils.getPreferredCollectionName( DailyUserAggregate )
         DBObject match = new BasicDBObject( '$match', new BasicDBObject( 'instance', 'ONE' ).append( 'node', 'ONE' ).append( 'organization', 'TWO' ) )
-        DBObject groupFields = new BasicDBObject( '_id', '$node').append( 'totalSessionCount', new BasicDBObject( '$sum', '$student.totalLessonSessionCount') )
+        DBObject groupFields = new BasicDBObject( '_id', '$node').append( 'totalSessionCount', new BasicDBObject( '$sum', '$student.total-lesson-session-count') )
         DBObject group = new BasicDBObject( '$group', groupFields )
         AggregationOutput aggregate = template.getCollection(collectionName).aggregate(match, group)
 
