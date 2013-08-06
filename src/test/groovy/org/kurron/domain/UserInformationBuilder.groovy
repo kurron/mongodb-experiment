@@ -1,4 +1,7 @@
 package org.kurron.domain
+
+import org.kurron.RandomDataGenerator
+
 /**
  * Convenience object builder.
  */

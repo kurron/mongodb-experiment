@@ -1,3 +1,5 @@
+package org.kurron
+
 import java.security.SecureRandom
 
 /**

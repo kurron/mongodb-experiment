@@ -1,6 +1,6 @@
 package org.kurron.domain
 
-import org.kurron.domain.ClassInformation
+import org.kurron.RandomDataGenerator
 
 /**
  * Convenience object builder.
