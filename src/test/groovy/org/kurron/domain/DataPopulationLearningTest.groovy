@@ -130,6 +130,7 @@ class DataPopulationLearningTest extends Specification {
             data.instance = 'ONE'
             data.schoolHouses = ['ONE']
             data.student.totalLessonSessionCount = 1
+            data.student.classParticipation.first().code = 'ONE'
             1.upto( NUMBER_OF_YEARS ) { year ->
                 1.upto( NUMBER_OF_DAYS ) { day ->
                     data.dateCode = day + (NUMBER_OF_DAYS * (year - 1))
@@ -137,7 +138,6 @@ class DataPopulationLearningTest extends Specification {
                     log.debug( "Date code for year $year day $day is $data.dateCode" )
                     if ( 0 == day % 10 ) {
                         log.info( "Inserting student $student for year $year day $day into database as record $data.id" )
-
                     }
                     template.insert( data )
                 }
@@ -150,9 +150,10 @@ class DataPopulationLearningTest extends Specification {
         String NODE = 'ONE'
         String ORGANIZATION = 'ONE'
         String SCHOOL_HOUSE = 'ONE'
+        String CLASS_CODE = 'ONE'
         long START_DATE = 1
         long STOP_DATE = 30
-        TypedAggregation<DailyUserAggregate> aggregation = newAggregation( DailyUserAggregate,  match( where( 'instance' ).is( INSTANCE ).and( 'node' ).is( NODE ).and( 'organization' ).is( ORGANIZATION ).and( 'schoolHouses' ).is( SCHOOL_HOUSE ).and( 'dateCode' ).gte( START_DATE ).lte( STOP_DATE ) ), group( 'node' ).sum( 'student.totalLessonSessionCount' ).as( 'total-session-count' ).count().as( 'count' ) )
+        TypedAggregation<DailyUserAggregate> aggregation = newAggregation( DailyUserAggregate,  match( where( 'instance' ).is( INSTANCE ).and( 'node' ).is( NODE ).and( 'organization' ).is( ORGANIZATION ).and( 'schoolHouses' ).is( SCHOOL_HOUSE ).and( 'student.classParticipation.code' ).is( CLASS_CODE ).and( 'dateCode' ).gte( START_DATE ).lte( STOP_DATE ) ), group( 'node' ).sum( 'student.totalLessonSessionCount' ).as( 'total-session-count' ).count().as( 'count' ) )
         AggregationResults<LearnerActivityReport> result = template.aggregate( aggregation, LearnerActivityReport )
         List<LearnerActivityReport> aggregate = result.getMappedResults()
 
