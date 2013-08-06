@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.MongoCollectionUtils
 import org.springframework.data.mongodb.core.MongoOperations
+import org.springframework.data.mongodb.core.aggregation.Aggregation
+import org.springframework.data.mongodb.core.aggregation.AggregationOperation
+import org.springframework.data.mongodb.core.aggregation.AggregationResults
+import org.springframework.data.mongodb.core.aggregation.TypedAggregation
 import org.springframework.data.mongodb.core.index.Index
 import org.springframework.data.mongodb.core.query.Query
 import org.springframework.test.context.ContextConfiguration
@@ -17,6 +21,7 @@ import spock.lang.Specification
 import java.security.SecureRandom
 
 import static org.springframework.data.mongodb.core.query.Criteria.*
+import static org.springframework.data.mongodb.core.aggregation.Aggregation.*
 
 /**
  * A learning test just to see how MongoDB might handle large amounts of data.
@@ -115,7 +120,7 @@ class DataPopulationLearningTest extends Specification {
         and: 'a known data set'
         final int NUMBER_OF_USERS = 2
         final int NUMBER_OF_YEARS = 2
-        final int NUMBER_OF_DAYS = 365
+        final int NUMBER_OF_DAYS = 30
         log.debug( "Creating $NUMBER_OF_USERS users" )
         DailyUserAggregateBuilder builder = new DailyUserAggregateBuilder()
         1.upto( NUMBER_OF_USERS ) { student ->
@@ -142,6 +147,10 @@ class DataPopulationLearningTest extends Specification {
         when: 'learner activity report is run'
         // start date, end date, school house, class
         String collectionName = MongoCollectionUtils.getPreferredCollectionName( DailyUserAggregate )
+        TypedAggregation<DailyUserAggregate> aggregation = newAggregation( DailyUserAggregate,  match( where( 'instance' ).is( 'ONE') ), group( 'node' ).sum( 'student.totalLessonSessionCount' ).as( 'total-session-count' ).count().as( 'count' ) )
+        AggregationResults<LearnerActivityReport> result = template.aggregate( aggregation, LearnerActivityReport )
+        List<LearnerActivityReport> aggregate = result.getMappedResults()
+/*
         DBObject matchFields = new BasicDBObject()
         matchFields.put( 'instance', 'ONE' )
         matchFields.put( 'node', 'ONE' )
@@ -155,11 +164,14 @@ class DataPopulationLearningTest extends Specification {
         groupFields.put( 'totalSessionCount',  new BasicDBObject( '$sum', '$student.total-lesson-session-count' ) )
         DBObject group = new BasicDBObject( '$group', groupFields )
         AggregationOutput aggregate = template.getCollection(collectionName).aggregate(match, group)
+*/
 
         then: 'we should have a valid report'
         assert aggregate != null
-        assert aggregate.commandResult.ok()
-        log.info( aggregate.toString() )
+        assert !aggregate.isEmpty()
+        aggregate.each {
+            log.info( it.toString() )
+        }
     }
 
     String randomElement( String [] collection ) {
