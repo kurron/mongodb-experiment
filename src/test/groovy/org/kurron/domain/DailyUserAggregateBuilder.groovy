@@ -29,7 +29,7 @@ class DailyUserAggregateBuilder {
             aggregate.tags << generator.randomHexString()
         }
 
-        aggregate.student.studentID = generator.randomHexString()
+        aggregate.student.code = generator.randomHexString()
         aggregate.student.totalLessonSessionCount = generator.randomNumberExclusive( 10 )
         aggregate.student.sustainment.learnedItemCount = generator.randomNumberExclusive( 10 )
         aggregate.student.sustainment.staleItemCount = generator.randomNumberExclusive( 100 )

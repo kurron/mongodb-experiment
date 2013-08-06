@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Field
 class Student {
     @JsonProperty( value = 'student-id' )
     @Field( value = 'student-id' )
-    String studentID
+    String code
 
     @JsonProperty( value = 'sustainment' )
     @Field( value = 'sustainment' )
@@ -44,7 +44,7 @@ class Student {
     @Override
     public String toString() {
         return "Student{" +
-                "studentID='" + studentID + '\'' +
+                "studentID='" + code + '\'' +
                 ", sustainment=" + sustainment +
                 ", mobileData=" + mobileData +
                 ", desktopData=" + desktopData +

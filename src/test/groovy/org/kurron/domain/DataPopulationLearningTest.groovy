@@ -104,6 +104,7 @@ class DataPopulationLearningTest extends Specification {
         log.info( aggregate.toString() )
     }
 
+    @Ignore( 'waiting for https://jira.springsource.org/browse/DATAMONGO-741 to be fixed' )
     def 'execute learner activity report'()
     {
         given: 'a valid MongoDB template'
@@ -145,7 +146,7 @@ class DataPopulationLearningTest extends Specification {
         }
 
         when: 'learner activity report is run'
-        // start date, end date, school house, class
+        // the attributes to filter on
         String INSTANCE = 'ONE'
         String NODE = 'ONE'
         String ORGANIZATION = 'ONE'
@@ -153,7 +154,8 @@ class DataPopulationLearningTest extends Specification {
         String CLASS_CODE = 'ONE'
         long START_DATE = 1
         long STOP_DATE = 30
-        TypedAggregation<DailyUserAggregate> aggregation = newAggregation( DailyUserAggregate,  match( where( 'instance' ).is( INSTANCE ).and( 'node' ).is( NODE ).and( 'organization' ).is( ORGANIZATION ).and( 'schoolHouses' ).is( SCHOOL_HOUSE ).and( 'student.classParticipation.code' ).is( CLASS_CODE ).and( 'dateCode' ).gte( START_DATE ).lte( STOP_DATE ) ), group( 'node' ).sum( 'student.totalLessonSessionCount' ).as( 'total-session-count' ).count().as( 'count' ) )
+
+        TypedAggregation<DailyUserAggregate> aggregation = newAggregation( DailyUserAggregate,  match( where( 'instance' ).is( INSTANCE ).and( 'node' ).is( NODE ).and( 'organization' ).is( ORGANIZATION ).and( 'schoolHouses' ).is( SCHOOL_HOUSE ).and( 'student.classParticipation.code' ).is( CLASS_CODE ).and( 'dateCode' ).gte( START_DATE ).lte( STOP_DATE ) ), group( 'student.code' ).sum( 'student.totalLessonSessionCount' ).as( 'total-session-count' ) )
         AggregationResults<LearnerActivityReport> result = template.aggregate( aggregation, LearnerActivityReport )
         List<LearnerActivityReport> aggregate = result.getMappedResults()
 
