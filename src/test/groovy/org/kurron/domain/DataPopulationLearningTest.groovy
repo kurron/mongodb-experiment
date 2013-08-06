@@ -150,24 +150,11 @@ class DataPopulationLearningTest extends Specification {
         String NODE = 'ONE'
         String ORGANIZATION = 'ONE'
         String SCHOOL_HOUSE = 'ONE'
-        TypedAggregation<DailyUserAggregate> aggregation = newAggregation( DailyUserAggregate,  match( where( 'instance' ).is( INSTANCE ).and( 'node' ).is( NODE ).and( 'organization' ).is( ORGANIZATION ).and( 'schoolHouses' ).is( SCHOOL_HOUSE ) ), group( 'node' ).sum( 'student.totalLessonSessionCount' ).as( 'total-session-count' ).count().as( 'count' ) )
+        long START_DATE = 1
+        long STOP_DATE = 30
+        TypedAggregation<DailyUserAggregate> aggregation = newAggregation( DailyUserAggregate,  match( where( 'instance' ).is( INSTANCE ).and( 'node' ).is( NODE ).and( 'organization' ).is( ORGANIZATION ).and( 'schoolHouses' ).is( SCHOOL_HOUSE ).and( 'dateCode' ).gte( START_DATE ).lte( STOP_DATE ) ), group( 'node' ).sum( 'student.totalLessonSessionCount' ).as( 'total-session-count' ).count().as( 'count' ) )
         AggregationResults<LearnerActivityReport> result = template.aggregate( aggregation, LearnerActivityReport )
         List<LearnerActivityReport> aggregate = result.getMappedResults()
-/*
-        DBObject matchFields = new BasicDBObject()
-        matchFields.put( 'instance', 'ONE' )
-        matchFields.put( 'node', 'ONE' )
-        matchFields.put( 'organization', 'ONE' )
-        matchFields.put( 'school-houses', 'ONE' )
-        matchFields.put( 'date-code', new BasicDBObject( '$gte', 1 ).append( '$lte', 365 ) )
-        DBObject match = new BasicDBObject( '$match', matchFields )
-
-        DBObject groupFields = new BasicDBObject()
-        groupFields.put( '_id', '$node' )
-        groupFields.put( 'totalSessionCount',  new BasicDBObject( '$sum', '$student.total-lesson-session-count' ) )
-        DBObject group = new BasicDBObject( '$group', groupFields )
-        AggregationOutput aggregate = template.getCollection(collectionName).aggregate(match, group)
-*/
 
         then: 'we should have a valid report'
         assert aggregate != null
