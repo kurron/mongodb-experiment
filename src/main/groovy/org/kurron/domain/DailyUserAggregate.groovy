@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.index.CompoundIndex
 import org.springframework.data.mongodb.core.index.CompoundIndexes
+import org.springframework.data.mongodb.core.mapping.DBRef
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field
 
@@ -55,6 +56,11 @@ class DailyUserAggregate {
     @JsonProperty( value = 'administrator' )
     @Field( value = 'administrator' )
     Administrator administrator = new Administrator()
+
+    @JsonProperty( value = 'user-information' )
+    @Field( value = 'user-information' )
+    @DBRef
+    UserInformation userInformation = new UserInformation()
 
     @Override
     public String toString() {

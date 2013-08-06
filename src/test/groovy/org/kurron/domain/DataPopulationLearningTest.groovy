@@ -118,11 +118,8 @@ class DataPopulationLearningTest extends Specification {
     {
         given: 'a valid MongoDB template'
         assert template != null
-
-        if ( template.collectionExists( DailyUserAggregate ) ) {
-            template.dropCollection( DailyUserAggregate )
-        }
-        template.createCollection( DailyUserAggregate )
+        createEmptyCollection(DailyUserAggregate)
+        createEmptyCollection(UserInformation)
 
         and: 'a valid indexing scheme'
         template.indexOps( DailyUserAggregate ).ensureIndex( new Index().on( 'instance', Sort.Direction.ASC ).on( 'node', Sort.Direction.ASC ).on( 'organization', Sort.Direction.ASC ).on( 'date-code', Sort.Direction.ASC ).on( 'school-houses', Sort.Direction.ASC ) )
