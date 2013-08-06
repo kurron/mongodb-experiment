@@ -150,7 +150,9 @@ class DataPopulationLearningTest extends Specification {
         matchFields.put( 'date-code', new BasicDBObject( '$gte', 1 ).append( '$lte', 365 ) )
         DBObject match = new BasicDBObject( '$match', matchFields )
 
-        DBObject groupFields = new BasicDBObject( '_id', '$node').append( 'totalSessionCount', new BasicDBObject( '$sum', '$student.total-lesson-session-count') )
+        DBObject groupFields = new BasicDBObject()
+        groupFields.put( '_id', '$node' )
+        groupFields.put( 'totalSessionCount',  new BasicDBObject( '$sum', '$student.total-lesson-session-count' ) )
         DBObject group = new BasicDBObject( '$group', groupFields )
         AggregationOutput aggregate = template.getCollection(collectionName).aggregate(match, group)
 

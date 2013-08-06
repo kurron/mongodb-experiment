@@ -49,24 +49,24 @@ class DailyUserAggregateBuilder {
 
         2.times {
             LanguagePair pair = new LanguagePair()
-            pair.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing ) ]
-            pair.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing ) ]
+            pair.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
+            pair.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
             pair.sessionCount = generator.randomNumberExclusive( 10 )
             aggregate.student.mobileData.languagesAccessed << pair
         }
 
         2.times {
             LanguagePair pair = new LanguagePair()
-            pair.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing ) ]
-            pair.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing ) ]
+            pair.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
+            pair.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
             pair.sessionCount = generator.randomNumberExclusive( 10 )
             aggregate.student.desktopData.languagesAccessed << pair
         }
 
         2.times {
             LanguagePair pair = new LanguagePair()
-            pair.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing ) ]
-            pair.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing ) ]
+            pair.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
+            pair.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
             pair.sessionCount = generator.randomNumberExclusive( 10 )
             aggregate.student.webData.languagesAccessed << pair
         }
@@ -76,8 +76,8 @@ class DailyUserAggregateBuilder {
             content.type = generator.randomBoolean() ? 'List' : 'Unit'
             content.title = generator.randomHexString()
             LanguagePair pair = new LanguagePair()
-            pair.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing ) ]
-            pair.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing ) ]
+            pair.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
+            pair.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
             pair.sessionCount = generator.randomNumberExclusive( 10 )
             content.pair = pair
             aggregate.student.learningContent << content
