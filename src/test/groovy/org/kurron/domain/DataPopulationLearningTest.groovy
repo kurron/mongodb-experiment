@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.MongoCollectionUtils
 import org.springframework.data.mongodb.core.MongoOperations
-import org.springframework.data.mongodb.core.aggregation.Aggregation
-import org.springframework.data.mongodb.core.aggregation.AggregationOperation
 import org.springframework.data.mongodb.core.aggregation.AggregationResults
 import org.springframework.data.mongodb.core.aggregation.TypedAggregation
 import org.springframework.data.mongodb.core.index.Index
@@ -37,33 +35,37 @@ class DataPopulationLearningTest extends Specification {
     @Autowired
     MongoOperations template
 
-    @Ignore( 'I do not want to accidentally blow away my current data set' )
+    //@Ignore( 'I do not want to accidentally blow away my current data set' )
     def 'import data'()
     {
         given: 'a valid MongoDB template'
         assert template != null
-        DailyUserAggregateBuilder builder = new DailyUserAggregateBuilder()
+        DailyUserAggregateBuilder aggregateBuilder = new DailyUserAggregateBuilder()
+        UserInformationBuilder userInformationBuilder = new UserInformationBuilder()
 
         and: 'an empty collection'
-        if ( template.collectionExists( DailyUserAggregate ) ) {
-            template.dropCollection( DailyUserAggregate )
-        }
-        template.createCollection( DailyUserAggregate )
+        createEmptyCollection(DailyUserAggregate)
+        createEmptyCollection(UserInformation)
 
         and: 'a valid indexing scheme'
-        template.indexOps( DailyUserAggregate ).ensureIndex( new Index().on( 'instance', Sort.Direction.ASC ).on( 'node', Sort.Direction.ASC ).on( 'organization', Sort.Direction.ASC ).on( 'date-code', Sort.Direction.ASC ) )
+        template.indexOps( DailyUserAggregate ).ensureIndex( new Index().on( 'instance', Sort.Direction.ASC ).on( 'node', Sort.Direction.ASC ).on( 'organization', Sort.Direction.ASC ).on( 'date-code', Sort.Direction.ASC ).on( 'school-houses', Sort.Direction.ASC ) )
+        template.indexOps( UserInformation ).ensureIndex( new Index().on( 'student-id', Sort.Direction.ASC ) )
 
         when: 'data is inserted into the database'
-        final int NUMBER_OF_USERS = 100
-        final int NUMBER_OF_YEARS = 10
-        final int NUMBER_OF_DAYS = 365
+        final int NUMBER_OF_USERS = 5
+        final int NUMBER_OF_YEARS = 2
+        final int NUMBER_OF_DAYS = 30
         log.debug( "Creating $NUMBER_OF_USERS users" )
         1.upto( NUMBER_OF_USERS ) { student ->
-            DailyUserAggregate data = builder.build()
+            UserInformation userInformation = userInformationBuilder.build()
+            template.insert( userInformation )
+
+            DailyUserAggregate data = aggregateBuilder.build()
             data.node = randomElement( choices )
             data.organization = randomElement( choices )
             data.instance = randomElement( choices )
             data.student.totalLessonSessionCount = 1
+            data.student.code = userInformation.studentID
             1.upto( NUMBER_OF_YEARS ) { year ->
                 1.upto( NUMBER_OF_DAYS ) { day ->
                     data.dateCode = day + (NUMBER_OF_DAYS * (year - 1))
@@ -81,6 +83,13 @@ class DataPopulationLearningTest extends Specification {
         then: 'we should be able to count the inserted documents'
         long count = template.count( new Query( where( 'node' ).is( 'TWO' ) ), DailyUserAggregate )
         log.info "Found $count in the database"
+    }
+
+    private void createEmptyCollection(Class<?> type) {
+        if (template.collectionExists(type)) {
+            template.dropCollection(type)
+        }
+        template.createCollection(type)
     }
 
     def 'execute aggregation'()
