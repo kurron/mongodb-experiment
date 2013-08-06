@@ -146,8 +146,11 @@ class DataPopulationLearningTest extends Specification {
 
         when: 'learner activity report is run'
         // start date, end date, school house, class
-        String collectionName = MongoCollectionUtils.getPreferredCollectionName( DailyUserAggregate )
-        TypedAggregation<DailyUserAggregate> aggregation = newAggregation( DailyUserAggregate,  match( where( 'instance' ).is( 'ONE') ), group( 'node' ).sum( 'student.totalLessonSessionCount' ).as( 'total-session-count' ).count().as( 'count' ) )
+        String INSTANCE = 'ONE'
+        String NODE = 'ONE'
+        String ORGANIZATION = 'ONE'
+        String SCHOOL_HOUSE = 'ONE'
+        TypedAggregation<DailyUserAggregate> aggregation = newAggregation( DailyUserAggregate,  match( where( 'instance' ).is( INSTANCE ).and( 'node' ).is( NODE ).and( 'organization' ).is( ORGANIZATION ).and( 'schoolHouses' ).is( SCHOOL_HOUSE ) ), group( 'node' ).sum( 'student.totalLessonSessionCount' ).as( 'total-session-count' ).count().as( 'count' ) )
         AggregationResults<LearnerActivityReport> result = template.aggregate( aggregation, LearnerActivityReport )
         List<LearnerActivityReport> aggregate = result.getMappedResults()
 /*

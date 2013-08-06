@@ -12,8 +12,15 @@ import org.springframework.data.mongodb.core.mapping.Field
  * Information about a user's daily activity in the system.
  */
 @JsonAutoDetect( getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE, fieldVisibility = JsonAutoDetect.Visibility.NONE )
-@Document
 class LearnerActivityReport {
+    @JsonProperty( value = 'organization' )
+    @Field( value = 'organization' )
+    String organization
+
+    @JsonProperty( value = 'date-run' )
+    @Field( value = 'date-run' )
+    Date dateRun
+
     @JsonProperty( value = 'total-session-count' )
     @Field( value = 'total-session-count' )
     long totalSessionCount
