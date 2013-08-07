@@ -181,6 +181,55 @@ class DataPopulationLearningTest extends Specification {
         }
     }
 
+    def 'generate test data for Ron'()
+    {
+        given: 'a valid MongoDB template'
+        assert template != null
+        createEmptyCollection(DailyUserAggregate)
+        createEmptyCollection(UserInformation)
+
+        and: 'a valid indexing scheme'
+        template.indexOps( DailyUserAggregate ).ensureIndex( new Index().on( 'instance', Sort.Direction.ASC ).on( 'node', Sort.Direction.ASC ).on( 'organization', Sort.Direction.ASC ).on( 'date-code', Sort.Direction.ASC ).on( 'school-houses', Sort.Direction.ASC ) )
+
+        and: 'a known data set'
+        final int NUMBER_OF_USERS = 2
+        final int NUMBER_OF_YEARS = 2
+        final int NUMBER_OF_DAYS = 30
+        log.debug( "Creating $NUMBER_OF_USERS users" )
+        DailyUserAggregateBuilder aggregateBuilder = new DailyUserAggregateBuilder()
+        UserInformationBuilder userInformationBuilder = new UserInformationBuilder()
+        1.upto( NUMBER_OF_USERS ) { student ->
+            UserInformation userInformation = userInformationBuilder.build()
+            template.insert( userInformation )
+
+            DailyUserAggregate data = aggregateBuilder.build()
+            data.node = 'ONE'
+            data.organization = 'ONE'
+            data.instance = 'ONE'
+            data.schoolHouses = ['ONE']
+            data.student.totalLessonSessionCount = 1
+            data.student.classParticipation.first().code = 'ONE'
+            data.student.code = userInformation.studentID
+            data.userInformation = userInformation.id
+            1.upto( NUMBER_OF_YEARS ) { year ->
+                1.upto( NUMBER_OF_DAYS ) { day ->
+                    data.dateCode = day + (NUMBER_OF_DAYS * (year - 1))
+                    data.id = UUID.randomUUID()
+                    log.debug( "Date code for year $year day $day is $data.dateCode" )
+                    if ( 0 == day % 10 ) {
+                        log.info( "Inserting student $student for year $year day $day into database as record $data.id" )
+                    }
+                    template.insert( data )
+                }
+            }
+        }
+
+        when: 'nothing interesting is done'
+
+        then: 'we have a populated database'
+        true
+    }
+
     String randomElement( String [] collection ) {
           collection[random.nextInt( collection.size())]
     }
