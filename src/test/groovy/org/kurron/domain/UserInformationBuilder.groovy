@@ -21,15 +21,15 @@ class UserInformationBuilder {
         user.organization = generator.randomHexString()
         user.tags = [ generator.randomHexString(), generator.randomHexString()]
         user.isActive = generator.randomBoolean()
-        user.dateCreated = now.minusDays( 240 ).millis
-        user.dateDeleted = now.millis
+        user.dateCreated = now.minusDays( 240 ).toDate()
+        user.dateDeleted = now.toDate()
         user.studentID = generator.randomHexString()
         user.instructorID = generator.randomHexString()
         user.administratorID = generator.randomHexString()
         user.email = generator.randomEMail()
-        user.lastLogInAsStudent = now.minusDays( 60 ).millis
-        user.lastLogInAsInstructor = now.minusDays( 90 ).millis
-        user.lastLogInAsAdministrator = now.minusDays( 120 ).millis
+        user.lastLogInAsStudent = now.minusDays( 60 ).toDate()
+        user.lastLogInAsInstructor = now.minusDays( 90 ).toDate()
+        user.lastLogInAsAdministrator = now.minusDays( 120 ).toDate()
         user
     }
 }

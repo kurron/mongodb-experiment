@@ -37,11 +37,11 @@ class UserInformation {
 
     @JsonProperty( value = 'date-created')
     @Field( value = 'date-created')
-    long dateCreated
+    Date dateCreated
 
     @JsonProperty( value = 'date-deleted')
     @Field( value = 'date-deleted')
-    long dateDeleted
+    Date dateDeleted
 
     @JsonProperty( value = 'student-id' )
     @Field( value = 'student-id' )
@@ -53,15 +53,15 @@ class UserInformation {
 
     @JsonProperty( value = 'last-logged-in-as-student' )
     @Field( value = 'last-logged-in-as-student' )
-    long lastLogInAsStudent
+    Date lastLogInAsStudent
 
     @JsonProperty( value = 'last-logged-in-as-instructor' )
     @Field( value = 'last-logged-in-as-instructor' )
-    long lastLogInAsInstructor
+    Date lastLogInAsInstructor
 
     @JsonProperty( value = 'last-logged-in-as-administrator' )
     @Field( value = 'last-logged-in-as-administrator' )
-    long lastLogInAsAdministrator
+    Date lastLogInAsAdministrator
 
     @JsonProperty( value = 'administrator-id' )
     @Field( value = 'administrator-id' )
