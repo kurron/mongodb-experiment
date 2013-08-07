@@ -16,7 +16,9 @@ class ClassInformationBuilder {
         user.id = generator.randomObjectId()
         user.title = generator.randomHexString()
         user.code = generator.randomHexString()
-        user.instructors << 'TEACHER.' + generator.randomHexString()
+        2.times {
+            user.instructors << 'TEACHER.' + generator.randomHexString()
+        }
         user
     }
 }

@@ -16,6 +16,7 @@ class ClassParticipationBuilder {
         classParticipation.enrolledToday = generator.randomBoolean()
         classParticipation.totalLearningTime = generator.randomNumberExclusive( 10 )
         classParticipation.code = generator.randomHexString()
+        classParticipation.classInformation = generator.randomHexString()
         classParticipation
     }
 }

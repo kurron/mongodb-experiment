@@ -21,6 +21,13 @@ class ClassParticipation {
     @Field( value = 'class-code' )
     String code
 
+    /**
+     * Id to the document in the ClassInformation collection.
+     */
+    @JsonProperty( value = 'class-information' )
+    @Field( value = 'class-information' )
+    String classInformation
+
     @Override
     public String toString() {
         return "ClassParticipation{" +

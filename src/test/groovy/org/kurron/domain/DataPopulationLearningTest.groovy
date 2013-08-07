@@ -188,9 +188,7 @@ class DataPopulationLearningTest extends Specification {
         assert template != null
         createEmptyCollection(DailyUserAggregate)
         createEmptyCollection(UserInformation)
-
-        and: 'a valid indexing scheme'
-        template.indexOps( DailyUserAggregate ).ensureIndex( new Index().on( 'instance', Sort.Direction.ASC ).on( 'node', Sort.Direction.ASC ).on( 'organization', Sort.Direction.ASC ).on( 'date-code', Sort.Direction.ASC ).on( 'school-houses', Sort.Direction.ASC ) )
+        createEmptyCollection(ClassInformation)
 
         and: 'a known data set'
         final int NUMBER_OF_USERS = 2
@@ -199,6 +197,16 @@ class DataPopulationLearningTest extends Specification {
         log.debug( "Creating $NUMBER_OF_USERS users" )
         DailyUserAggregateBuilder aggregateBuilder = new DailyUserAggregateBuilder()
         UserInformationBuilder userInformationBuilder = new UserInformationBuilder()
+        ClassInformationBuilder classInformationBuilder = new ClassInformationBuilder()
+
+        def courses = []
+        10.times {
+            courses << classInformationBuilder.build()
+        }
+        courses.each {
+            template.insert( it )
+        }
+
         1.upto( NUMBER_OF_USERS ) { student ->
             UserInformation userInformation = userInformationBuilder.build()
             template.insert( userInformation )
@@ -211,6 +219,9 @@ class DataPopulationLearningTest extends Specification {
             data.student.totalLessonSessionCount = 1
             data.student.classParticipation.first().code = 'ONE'
             data.student.code = userInformation.studentID
+            data.student.classParticipation.each {
+                it.classInformation = courses[random.nextInt(courses.size())].id
+            }
             data.userInformation = userInformation.id
             1.upto( NUMBER_OF_YEARS ) { year ->
                 1.upto( NUMBER_OF_DAYS ) { day ->

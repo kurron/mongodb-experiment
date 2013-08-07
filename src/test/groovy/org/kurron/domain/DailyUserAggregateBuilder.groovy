@@ -15,6 +15,8 @@ class DailyUserAggregateBuilder {
 
     private final learningLanguageListing = ['SPANISH', 'FRENCH', 'GERMAN']
 
+    private final ClassParticipationBuilder classParticipationBuilder = new ClassParticipationBuilder()
+
     DailyUserAggregate build() {
         DailyUserAggregate aggregate = new DailyUserAggregate()
         aggregate.id = generator.randomObjectId()
@@ -72,11 +74,7 @@ class DailyUserAggregateBuilder {
             aggregate.student.learningContent << content
         }
         3.times {
-            ClassParticipation participation = new ClassParticipation()
-            participation.code = generator.randomHexString()
-            participation.totalLearningTime = generator.randomNumberExclusive( 100 )
-            participation.enrolledToday = generator.randomBoolean()
-            aggregate.student.classParticipation << participation
+            aggregate.student.classParticipation << classParticipationBuilder.build()
         }
 
         aggregate.instructor.instructorID = 'TEACHER.' + generator.randomHexString()
