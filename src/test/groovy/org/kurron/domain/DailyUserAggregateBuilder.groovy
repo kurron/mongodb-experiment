@@ -38,26 +38,21 @@ class DailyUserAggregateBuilder {
         aggregate.student.sustainment.staleItemCount = generator.randomNumberExclusive( 100 )
         aggregate.student.sustainment.totalRefreshmentTime = generator.randomNumberExclusive( 100 )
 
-        aggregate.student.mobileData.downloadedListCount = generator.randomNumberExclusive( 10 )
-        aggregate.student.mobileData.downloadedCourseCountCount = generator.randomNumberExclusive( 10 )
-        aggregate.student.mobileData.sessionCount = generator.randomNumberExclusive( 10 )
-        aggregate.student.mobileData.sessionTime = generator.randomNumberExclusive( 100 )
-
-        aggregate.student.desktopData.downloadedListCount = generator.randomNumberExclusive( 10 )
-        aggregate.student.desktopData.downloadedCourseCountCount = generator.randomNumberExclusive( 10 )
-        aggregate.student.desktopData.sessionCount = generator.randomNumberExclusive( 10 )
-        aggregate.student.desktopData.sessionTime = generator.randomNumberExclusive( 100 )
-
-        aggregate.student.webData.downloadedListCount = generator.randomNumberExclusive( 10 )
-        aggregate.student.webData.downloadedCourseCountCount = generator.randomNumberExclusive( 10 )
-        aggregate.student.webData.sessionCount = generator.randomNumberExclusive( 10 )
-        aggregate.student.webData.sessionTime = generator.randomNumberExclusive( 100 )
+        4.times {
+            AssetList asset = new AssetList()
+            asset.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
+            asset.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
+            asset.assetType = generator.randomAssetType()
+            asset.platform = generator.randomPlatform()
+            aggregate.student.assetsDownloaded << asset
+        }
 
         4.times {
             LanguagePair pair = new LanguagePair()
             pair.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
             pair.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
             pair.sessionCount = generator.randomNumberExclusive( 10 )
+            pair.sessionTime = generator.randomNumberExclusive( 100 )
             pair.platform = generator.randomPlatform()
             aggregate.student.languagesAccessed << pair
         }

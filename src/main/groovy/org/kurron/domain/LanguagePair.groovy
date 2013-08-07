@@ -21,6 +21,10 @@ class LanguagePair {
     @Field( value = 'session-count' )
     int sessionCount
 
+    @JsonProperty( value = 'session-time')
+    @Field( value = 'session-time')
+    int sessionTime
+
     @JsonProperty( value = 'platform')
     @Field( value = 'platform')
     String platform

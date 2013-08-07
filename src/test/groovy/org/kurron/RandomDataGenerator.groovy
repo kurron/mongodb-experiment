@@ -18,6 +18,11 @@ public class RandomDataGenerator {
     private final ArrayList platforms = ['web', 'desktop', 'mobile']
 
     /**
+     * Legal asset types
+     */
+    private final ArrayList assetTypes = ['list', 'unit']
+
+    /**
      * Generates a random valid platform
      * @return a random string from platforms
      */
@@ -25,6 +30,14 @@ public class RandomDataGenerator {
         return platforms[randomArrayIndex( platforms.size() )]
     }
 
+
+    /**
+     * Generates a random valid platform
+     * @return a random string from platforms
+     */
+    public String randomAssetType(){
+        return assetTypes[randomArrayIndex( assetTypes.size() )]
+    }
 
     /**
      * Generates random data.

@@ -35,7 +35,7 @@ class DataPopulationLearningTest extends Specification {
     @Autowired
     MongoOperations template
 
-    @Ignore( 'I do not want to accidentally blow away my current data set' )
+    //@Ignore( 'I do not want to accidentally blow away my current data set' )
     def 'import data'()
     {
         given: 'a valid MongoDB template'

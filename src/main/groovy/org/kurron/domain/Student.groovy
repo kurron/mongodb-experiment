@@ -17,17 +17,9 @@ class Student {
     @Field( value = 'sustainment' )
     Sustainment sustainment = new Sustainment()
 
-    @JsonProperty( value = 'mobile-data' )
-    @Field( value = 'mobile-data' )
-    PlatformData mobileData = new PlatformData()
-
-    @JsonProperty( value = 'desktop-data' )
-    @Field( value = 'desktop-data' )
-    PlatformData desktopData = new PlatformData()
-
-    @JsonProperty( value = 'web-data' )
-    @Field( value = 'web-data' )
-    PlatformData webData = new PlatformData()
+    @JsonProperty( value = "assets-downloaded")
+    @Field( value = "assets-downloaded")
+    List<AssetList> assetsDownloaded = new ArrayList<>( 2 )
 
     @JsonProperty( value = 'languages-accessed' )
     @Field( value = 'languages-accessed' )
@@ -50,9 +42,6 @@ class Student {
         return "Student{" +
                 "studentID='" + code + '\'' +
                 ", sustainment=" + sustainment +
-                ", mobileData=" + mobileData +
-                ", desktopData=" + desktopData +
-                ", webData=" + webData +
                 ", languagesAccessed=" + languagesAccessed +
                 ", totalLessonSessionCount=" + totalLessonSessionCount +
                 ", learningContent=" + learningContent +
