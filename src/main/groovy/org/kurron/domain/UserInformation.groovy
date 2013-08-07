@@ -19,6 +19,18 @@ class UserInformation {
     @Field( value = 'instance')
     String instance
 
+    @JsonProperty( value = 'node')
+    @Field( value = 'node')
+    String node
+
+    @JsonProperty( value = 'organization')
+    @Field( value = 'organization')
+    String organization
+
+    @JsonProperty( value = 'tags' )
+    @Field( value = 'tags' )
+    List<String> tags = new ArrayList<>( 2 )
+
     @JsonProperty( value = 'is-active')
     @Field( value = 'is-active')
     Boolean isActive

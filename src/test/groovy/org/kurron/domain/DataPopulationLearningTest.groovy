@@ -209,6 +209,11 @@ class DataPopulationLearningTest extends Specification {
 
         1.upto( NUMBER_OF_USERS ) { student ->
             UserInformation userInformation = userInformationBuilder.build()
+            userInformation.instance = 'ONE'
+            userInformation.node = 'ONE'
+            userInformation.organization = 'ONE'
+            userInformation.tags = ['ONE', 'TWO', 'THREE']
+            userInformation.isActive = true
             template.insert( userInformation )
 
             DailyUserAggregate data = aggregateBuilder.build()
@@ -216,6 +221,7 @@ class DataPopulationLearningTest extends Specification {
             data.organization = 'ONE'
             data.instance = 'ONE'
             data.schoolHouses = ['ONE']
+            data.tags = [ 'ONE', 'TWO', 'THREE' ]
             data.student.totalLessonSessionCount = 1
             data.student.classParticipation.first().code = 'ONE'
             data.student.code = userInformation.studentID
