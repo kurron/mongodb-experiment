@@ -93,6 +93,7 @@ class DataPopulationLearningTest extends Specification {
         template.createCollection(type)
     }
 
+
     def 'execute aggregation'()
     {
         given: 'a valid MongoDB template'

@@ -21,12 +21,17 @@ class LanguagePair {
     @Field( value = 'session-count' )
     int sessionCount
 
+    @JsonProperty( value = 'platform')
+    @Field( value = 'platform')
+    String platform
+
     @Override
     public String toString() {
         return "LanguagePair{" +
                 "knownCode='" + knownCode + '\'' +
                 ", learningCode='" + learningCode + '\'' +
-                ", sessionCount=" + sessionCount +
+                ", sessionCount=" + sessionCount + '\'' +
+                ", platform=" + platform +
                 '}';
     }
 }

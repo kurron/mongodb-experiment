@@ -51,28 +51,13 @@ class DailyUserAggregateBuilder {
         aggregate.student.webData.sessionCount = generator.randomNumberExclusive( 10 )
         aggregate.student.webData.sessionTime = generator.randomNumberExclusive( 100 )
 
-        2.times {
+        4.times {
             LanguagePair pair = new LanguagePair()
             pair.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
             pair.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
             pair.sessionCount = generator.randomNumberExclusive( 10 )
-            aggregate.student.mobileData.languagesAccessed << pair
-        }
-
-        2.times {
-            LanguagePair pair = new LanguagePair()
-            pair.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
-            pair.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
-            pair.sessionCount = generator.randomNumberExclusive( 10 )
-            aggregate.student.desktopData.languagesAccessed << pair
-        }
-
-        2.times {
-            LanguagePair pair = new LanguagePair()
-            pair.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
-            pair.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
-            pair.sessionCount = generator.randomNumberExclusive( 10 )
-            aggregate.student.webData.languagesAccessed << pair
+            pair.platform = generator.randomPlatform()
+            aggregate.student.languagesAccessed << pair
         }
 
         4.times {
