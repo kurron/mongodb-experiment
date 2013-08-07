@@ -115,7 +115,7 @@ class DataPopulationLearningTest extends Specification {
         log.info( aggregate.toString() )
     }
 
-    //@Ignore( 'waiting for https://jira.springsource.org/browse/DATAMONGO-741 to be fixed' )
+    @Ignore( 'waiting for https://jira.springsource.org/browse/DATAMONGO-741 to be fixed' )
     def 'execute learner activity report'()
     {
         given: 'a valid MongoDB template'
