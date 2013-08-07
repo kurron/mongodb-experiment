@@ -15,8 +15,6 @@ class DailyUserAggregateBuilder {
 
     private final learningLanguageListing = ['SPANISH', 'FRENCH', 'GERMAN']
 
-    private final UserInformationBuilder builder = new UserInformationBuilder()
-
     DailyUserAggregate build() {
         DailyUserAggregate aggregate = new DailyUserAggregate()
         aggregate.id = generator.randomObjectId()
@@ -30,7 +28,7 @@ class DailyUserAggregateBuilder {
         2.times {
             aggregate.tags << generator.randomHexString()
         }
-        aggregate.userInformation = builder.build()
+        aggregate.userInformation = generator.randomHexString()
 
         aggregate.student.code = generator.randomHexString()
         aggregate.student.totalLessonSessionCount = generator.randomNumberExclusive( 10 )

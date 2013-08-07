@@ -66,6 +66,7 @@ class DataPopulationLearningTest extends Specification {
             data.instance = randomElement( choices )
             data.student.totalLessonSessionCount = 1
             data.student.code = userInformation.studentID
+            data.userInformation = userInformation.id
             1.upto( NUMBER_OF_YEARS ) { year ->
                 1.upto( NUMBER_OF_DAYS ) { day ->
                     data.dateCode = day + (NUMBER_OF_DAYS * (year - 1))
@@ -114,7 +115,7 @@ class DataPopulationLearningTest extends Specification {
         log.info( aggregate.toString() )
     }
 
-    @Ignore( 'waiting for https://jira.springsource.org/browse/DATAMONGO-741 to be fixed' )
+    //@Ignore( 'waiting for https://jira.springsource.org/browse/DATAMONGO-741 to be fixed' )
     def 'execute learner activity report'()
     {
         given: 'a valid MongoDB template'
@@ -144,6 +145,7 @@ class DataPopulationLearningTest extends Specification {
             data.student.totalLessonSessionCount = 1
             data.student.classParticipation.first().code = 'ONE'
             data.student.code = userInformation.studentID
+            data.userInformation = userInformation.id
             1.upto( NUMBER_OF_YEARS ) { year ->
                 1.upto( NUMBER_OF_DAYS ) { day ->
                     data.dateCode = day + (NUMBER_OF_DAYS * (year - 1))
