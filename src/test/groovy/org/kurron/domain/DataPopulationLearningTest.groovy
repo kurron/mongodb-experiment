@@ -35,7 +35,7 @@ class DataPopulationLearningTest extends Specification {
     @Autowired
     MongoOperations template
 
-    //@Ignore( 'I do not want to accidentally blow away my current data set' )
+    @Ignore( 'I do not want to accidentally blow away my current data set' )
     def 'import data'()
     {
         given: 'a valid MongoDB template'
@@ -99,6 +99,7 @@ class DataPopulationLearningTest extends Specification {
 
         and: 'a valid collection'
         assert template.collectionExists( DailyUserAggregate )
+        assert template.collectionExists( UserInformation )
 
         when: 'aggregation job is run'
         String collectionName = MongoCollectionUtils.getPreferredCollectionName( DailyUserAggregate )
@@ -129,15 +130,20 @@ class DataPopulationLearningTest extends Specification {
         final int NUMBER_OF_YEARS = 2
         final int NUMBER_OF_DAYS = 30
         log.debug( "Creating $NUMBER_OF_USERS users" )
-        DailyUserAggregateBuilder builder = new DailyUserAggregateBuilder()
+        DailyUserAggregateBuilder aggregateBuilder = new DailyUserAggregateBuilder()
+        UserInformationBuilder userInformationBuilder = new UserInformationBuilder()
         1.upto( NUMBER_OF_USERS ) { student ->
-            DailyUserAggregate data = builder.build()
+            UserInformation userInformation = userInformationBuilder.build()
+            template.insert( userInformation )
+
+            DailyUserAggregate data = aggregateBuilder.build()
             data.node = 'ONE'
             data.organization = 'ONE'
             data.instance = 'ONE'
             data.schoolHouses = ['ONE']
             data.student.totalLessonSessionCount = 1
             data.student.classParticipation.first().code = 'ONE'
+            data.student.code = userInformation.studentID
             1.upto( NUMBER_OF_YEARS ) { year ->
                 1.upto( NUMBER_OF_DAYS ) { day ->
                     data.dateCode = day + (NUMBER_OF_DAYS * (year - 1))
