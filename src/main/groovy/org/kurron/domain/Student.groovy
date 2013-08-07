@@ -29,6 +29,10 @@ class Student {
     @Field( value = 'web-data' )
     PlatformData webData = new PlatformData()
 
+    @JsonProperty( value = 'languages-accessed' )
+    @Field( value = 'languages-accessed' )
+    List<LanguagePair> languagesAccessed = new ArrayList<>( 2 )
+
     @JsonProperty( value = 'total-lesson-session-count' )
     @Field( value = 'total-lesson-session-count' )
     int totalLessonSessionCount
@@ -49,6 +53,7 @@ class Student {
                 ", mobileData=" + mobileData +
                 ", desktopData=" + desktopData +
                 ", webData=" + webData +
+                ", languagesAccessed=" + languagesAccessed +
                 ", totalLessonSessionCount=" + totalLessonSessionCount +
                 ", learningContent=" + learningContent +
                 ", classParticipation=" + classParticipation +

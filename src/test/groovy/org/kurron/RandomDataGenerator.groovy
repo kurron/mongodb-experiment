@@ -12,6 +12,19 @@ public class RandomDataGenerator {
      */
     private final char[] theCharacters = ['A', 'B', 'C', 'D', 'E', 'F', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
+    /**
+     * Legal platforms
+     */
+    private final ArrayList platforms = ['web', 'desktop', 'mobile']
+
+    /**
+     * Generates a random valid platform
+     * @return a random string from platforms
+     */
+    public String randomPlatform(){
+        return platforms[randomArrayIndex( platforms.size() )]
+    }
+
 
     /**
      * Generates random data.

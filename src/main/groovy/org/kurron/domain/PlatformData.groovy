@@ -25,10 +25,6 @@ class PlatformData {
     @Field( value = 'session-time' )
     int sessionTime
 
-    @JsonProperty( value = 'languages-accessed' )
-    @Field( value = 'languages-accessed' )
-    List<LanguagePair> languagesAccessed = new ArrayList<>( 2 )
-
     @Override
     public String toString() {
         return "PlatformData{" +
@@ -36,7 +32,6 @@ class PlatformData {
                 ", downloadedCourseCountCount=" + downloadedCourseCountCount +
                 ", sessionCount=" + sessionCount +
                 ", sessionTime=" + sessionTime +
-                ", languagesAccessed=" + languagesAccessed +
                 '}';
     }
 }
