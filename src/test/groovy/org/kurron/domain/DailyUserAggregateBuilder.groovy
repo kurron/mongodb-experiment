@@ -33,8 +33,8 @@ class DailyUserAggregateBuilder {
         aggregate.userInformation = generator.randomHexString()
 
         aggregate.student.code = generator.randomHexString()
-        aggregate.student.sustainment.learnedItemCount = generator.randomNumberExclusive( 10 )
-        aggregate.student.sustainment.staleItemCount = generator.randomNumberExclusive( 100 )
+        aggregate.student.sustainment.learnedItemCount = generator.randomNumberExclusive( 100 )
+        aggregate.student.sustainment.staleItemCount = generator.randomNumberExclusive( aggregate.student.sustainment.learnedItemCount )
         aggregate.student.sustainment.totalRefreshmentTime = generator.randomNumberExclusive( 100 )
 
         4.times {
