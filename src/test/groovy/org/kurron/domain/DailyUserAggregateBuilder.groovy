@@ -65,6 +65,7 @@ class DailyUserAggregateBuilder {
             pair.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
             pair.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
             pair.sessionCount = generator.randomNumberInclusive( 10 )
+            pair.sessionTime = pair.sessionCount // have one-minute sessions
             content.pair = pair
             aggregate.student.learningContent << content
         }
