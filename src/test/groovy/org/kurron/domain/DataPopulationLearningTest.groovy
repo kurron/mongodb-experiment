@@ -223,14 +223,13 @@ class DataPopulationLearningTest extends Specification {
             data.schoolHouses = ['ONE']
             data.tags = [ 'ONE', 'TWO', 'THREE' ]
             data.student.totalLessonSessionCount = 1
-            def saved = data.student.classParticipation.first()
-            saved.code = 'ONE'
-            data.student.classParticipation.clear()
-            data.student.classParticipation << saved
             data.student.code = userInformation.studentID
             data.student.classParticipation.each {
-                it.classInformation = courses[random.nextInt(courses.size())].id
+                def course = courses[random.nextInt(courses.size())]
+                it.classInformation = course.id
+                it.code = course.code
             }
+            data.student.classParticipation.first().code = 'ONE'
             data.userInformation = userInformation.id
             1.upto( NUMBER_OF_YEARS ) { year ->
                 1.upto( NUMBER_OF_DAYS ) { day ->
