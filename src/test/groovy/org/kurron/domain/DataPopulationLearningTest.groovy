@@ -35,7 +35,7 @@ class DataPopulationLearningTest extends Specification {
     @Autowired
     MongoOperations template
 
-    //@Ignore( 'I do not want to accidentally blow away my current data set' )
+    @Ignore( 'I do not want to accidentally blow away my current data set' )
     def 'import data'()
     {
         given: 'a valid MongoDB template'
@@ -64,7 +64,6 @@ class DataPopulationLearningTest extends Specification {
             data.node = randomElement( choices )
             data.organization = randomElement( choices )
             data.instance = randomElement( choices )
-            data.student.totalLessonSessionCount = 1
             data.student.code = userInformation.studentID
             data.userInformation = userInformation.id
             1.upto( NUMBER_OF_YEARS ) { year ->
@@ -143,7 +142,6 @@ class DataPopulationLearningTest extends Specification {
             data.organization = 'ONE'
             data.instance = 'ONE'
             data.schoolHouses = ['ONE']
-            data.student.totalLessonSessionCount = 1
             data.student.classParticipation.first().code = 'ONE'
             data.student.code = userInformation.studentID
             data.userInformation = userInformation.id
@@ -222,14 +220,11 @@ class DataPopulationLearningTest extends Specification {
             data.instance = 'ONE'
             data.schoolHouses = ['ONE']
             data.tags = [ 'ONE', 'TWO', 'THREE' ]
-            data.student.totalLessonSessionCount = 1
+            data.student.classParticipation.first().code = 'ONE'
             data.student.code = userInformation.studentID
             data.student.classParticipation.each {
-                def course = courses[random.nextInt(courses.size())]
-                it.classInformation = course.id
-                it.code = course.code
+                it.classInformation = courses[random.nextInt(courses.size())].id
             }
-            data.student.classParticipation.first().code = 'ONE'
             data.userInformation = userInformation.id
             1.upto( NUMBER_OF_YEARS ) { year ->
                 1.upto( NUMBER_OF_DAYS ) { day ->
