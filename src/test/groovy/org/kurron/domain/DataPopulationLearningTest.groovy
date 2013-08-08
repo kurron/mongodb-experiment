@@ -223,7 +223,10 @@ class DataPopulationLearningTest extends Specification {
             data.schoolHouses = ['ONE']
             data.tags = [ 'ONE', 'TWO', 'THREE' ]
             data.student.totalLessonSessionCount = 1
-            data.student.classParticipation.first().code = 'ONE'
+            def saved = data.student.classParticipation.first()
+            saved.code = 'ONE'
+            data.student.classParticipation.clear()
+            data.student.classParticipation << saved
             data.student.code = userInformation.studentID
             data.student.classParticipation.each {
                 it.classInformation = courses[random.nextInt(courses.size())].id
