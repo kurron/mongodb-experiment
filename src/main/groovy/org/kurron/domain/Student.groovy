@@ -25,9 +25,6 @@ class Student {
     @Field( value = 'languages-accessed' )
     List<LanguagePair> languagesAccessed = new ArrayList<>( 2 )
 
-    @JsonProperty( value = 'total-lesson-session-count' )
-    @Field( value = 'total-lesson-session-count' )
-    int totalLessonSessionCount
 
     @JsonProperty( value = 'learning-content' )
     @Field( value = 'learning-content' )
@@ -43,7 +40,6 @@ class Student {
                 "studentID='" + code + '\'' +
                 ", sustainment=" + sustainment +
                 ", languagesAccessed=" + languagesAccessed +
-                ", totalLessonSessionCount=" + totalLessonSessionCount +
                 ", learningContent=" + learningContent +
                 ", classParticipation=" + classParticipation +
                 '}';

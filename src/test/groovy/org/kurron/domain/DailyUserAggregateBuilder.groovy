@@ -33,10 +33,9 @@ class DailyUserAggregateBuilder {
         aggregate.userInformation = generator.randomHexString()
 
         aggregate.student.code = generator.randomHexString()
-        aggregate.student.totalLessonSessionCount = generator.randomNumberInclusive( 10 )
-        aggregate.student.sustainment.learnedItemCount = generator.randomNumberInclusive( 10 )
-        aggregate.student.sustainment.staleItemCount = generator.randomNumberInclusive( 100 )
-        aggregate.student.sustainment.totalRefreshmentTime = generator.randomNumberInclusive( 100 )
+        aggregate.student.sustainment.learnedItemCount = generator.randomNumberExclusive( 10 )
+        aggregate.student.sustainment.staleItemCount = generator.randomNumberExclusive( 100 )
+        aggregate.student.sustainment.totalRefreshmentTime = generator.randomNumberExclusive( 100 )
 
         4.times {
             AssetList asset = new AssetList()
@@ -51,8 +50,8 @@ class DailyUserAggregateBuilder {
             LanguagePair pair = new LanguagePair()
             pair.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
             pair.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
-            pair.sessionCount = generator.randomNumberInclusive( 10 )
-            pair.sessionTime = pair.sessionCount // have one-minute sessions
+            pair.sessionCount = generator.randomNumberExclusive( 10 )
+            pair.sessionTime = generator.randomNumberExclusive( 100 )
             pair.platform = generator.randomPlatform()
             aggregate.student.languagesAccessed << pair
         }
@@ -64,8 +63,7 @@ class DailyUserAggregateBuilder {
             LanguagePair pair = new LanguagePair()
             pair.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
             pair.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
-            pair.sessionCount = generator.randomNumberInclusive( 10 )
-            pair.sessionTime = pair.sessionCount // have one-minute sessions
+            pair.sessionCount = generator.randomNumberExclusive( 10 )
             content.pair = pair
             aggregate.student.learningContent << content
         }
@@ -74,17 +72,17 @@ class DailyUserAggregateBuilder {
         }
 
         aggregate.instructor.instructorID = 'TEACHER.' + generator.randomHexString()
-        aggregate.instructor.totalReportsGeneratedCount = generator.randomNumberInclusive( 10 )
-        aggregate.instructor.totalAssignmentsGeneratedCount = generator.randomNumberInclusive( 10 )
-        aggregate.instructor.totalListsPublishedCount = generator.randomNumberInclusive( 10 )
-        aggregate.instructor.totalClassesCreatedCount = generator.randomNumberInclusive( 10 )
-        aggregate.instructor.totalInstructorPortalSessionCount = generator.randomNumberInclusive( 10 )
-        aggregate.instructor.totalInstructorPortalSessionTime = generator.randomNumberInclusive( 100 )
+        aggregate.instructor.totalReportsGeneratedCount = generator.randomNumberExclusive( 10 )
+        aggregate.instructor.totalAssignmentsGeneratedCount = generator.randomNumberExclusive( 10 )
+        aggregate.instructor.totalListsPublishedCount = generator.randomNumberExclusive( 10 )
+        aggregate.instructor.totalClassesCreatedCount = generator.randomNumberExclusive( 10 )
+        aggregate.instructor.totalInstructorPortalSessionCount = generator.randomNumberExclusive( 10 )
+        aggregate.instructor.totalInstructorPortalSessionTime = generator.randomNumberExclusive( 100 )
 
         aggregate.administrator.administratorID = generator.randomHexString()
-        aggregate.administrator.totalReportsGeneratedCount = generator.randomNumberInclusive( 10 )
-        aggregate.administrator.totalPortalSessionCount = generator.randomNumberInclusive( 10 )
-        aggregate.administrator.totalPortalSessionTime = generator.randomNumberInclusive( 100 )
+        aggregate.administrator.totalReportsGeneratedCount = generator.randomNumberExclusive( 10 )
+        aggregate.administrator.totalPortalSessionCount = generator.randomNumberExclusive( 10 )
+        aggregate.administrator.totalPortalSessionTime = generator.randomNumberExclusive( 100 )
 
 
         aggregate
