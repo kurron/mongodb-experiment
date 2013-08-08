@@ -116,6 +116,16 @@ public class RandomDataGenerator {
     }
 
     /**
+     * Generates a random integer from 1 up to and including the specified max value.
+     * @param maxValue top of the number range.
+     * @return random number.
+     */
+    public int randomNumberInclusive( final int maxValue )
+    {
+        return generator.nextInt( maxValue ) + 1
+    }
+
+    /**
      * Generates a random boolean value.
      * @return true or false.
      */
