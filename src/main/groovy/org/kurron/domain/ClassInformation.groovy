@@ -27,6 +27,9 @@ class ClassInformation {
     @Field( value = 'instructors' )
     List<String> instructors = new ArrayList<>( 2 )
 
+    @JsonProperty( value = 'school-house' )
+    @Field( value = 'school-house' )
+    String schoolHouse
 
     @Override
     public String toString() {
@@ -35,6 +38,7 @@ class ClassInformation {
                 ", title='" + title + '\'' +
                 ", code='" + code + '\'' +
                 ", instructors=" + instructors +
+                ", schoolHouse='" + schoolHouse + '\'' +
                 '}';
     }
 }

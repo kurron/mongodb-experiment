@@ -19,6 +19,7 @@ class ClassInformationBuilder {
         2.times {
             user.instructors << 'TEACHER.' + generator.randomHexString()
         }
+        user.schoolHouse = generator.randomHexString()
         user
     }
 }
