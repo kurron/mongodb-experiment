@@ -35,7 +35,7 @@ class DataPopulationLearningTest extends Specification {
     @Autowired
     MongoOperations template
 
-    @Ignore( 'I do not want to accidentally blow away my current data set' )
+    //@Ignore( 'I do not want to accidentally blow away my current data set' )
     def 'import data'()
     {
         given: 'a valid MongoDB template'
@@ -52,7 +52,7 @@ class DataPopulationLearningTest extends Specification {
         template.indexOps( UserInformation ).ensureIndex( new Index().on( 'student-id', Sort.Direction.ASC ) )
 
         when: 'data is inserted into the database'
-        final int NUMBER_OF_USERS = 20
+        final int NUMBER_OF_USERS = 2
         final int NUMBER_OF_YEARS = 2
         final int NUMBER_OF_DAYS = 30
         log.debug( "Creating $NUMBER_OF_USERS users" )
@@ -91,7 +91,7 @@ class DataPopulationLearningTest extends Specification {
         }
         template.createCollection(type)
     }
-    @Ignore("TMP")
+
     def 'execute aggregation'()
     {
         given: 'a valid MongoDB template'
@@ -256,7 +256,7 @@ class DataPopulationLearningTest extends Specification {
         true
 
     }
-    @Ignore("TMP")
+
     def 'generate test data for Ron'()
     {
         given: 'a valid MongoDB template'
