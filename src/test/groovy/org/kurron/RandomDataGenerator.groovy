@@ -23,6 +23,20 @@ public class RandomDataGenerator {
     private final ArrayList assetTypes = ['list', 'unit']
 
     /**
+     * Legal Node Statuses
+     */
+    private final ArrayList nodeStatus = ['trial', 'active', 'inactive']
+
+
+    /**
+     * Generates a random valid node status
+     * @return a random string from nodeStatus
+     */
+    public String randomNodeStatus(){
+        return nodeStatus[randomArrayIndex( nodeStatus.size() )]
+    }
+
+    /**
      * Generates a random valid platform
      * @return a random string from platforms
      */

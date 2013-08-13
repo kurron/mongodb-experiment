@@ -52,7 +52,7 @@ class DataPopulationLearningTest extends Specification {
         template.indexOps( UserInformation ).ensureIndex( new Index().on( 'student-id', Sort.Direction.ASC ) )
 
         when: 'data is inserted into the database'
-        final int NUMBER_OF_USERS = 5
+        final int NUMBER_OF_USERS = 20
         final int NUMBER_OF_YEARS = 2
         final int NUMBER_OF_DAYS = 30
         log.debug( "Creating $NUMBER_OF_USERS users" )
@@ -91,7 +91,6 @@ class DataPopulationLearningTest extends Specification {
         }
         template.createCollection(type)
     }
-
 
     def 'execute aggregation'()
     {
@@ -178,6 +177,84 @@ class DataPopulationLearningTest extends Specification {
         aggregate.each {
             log.info( it.toString() )
         }
+    }
+
+    def 'generate test Node data documents for Chris'()
+    {
+        given: 'a valid MongoDB template'
+        assert template != null
+        createEmptyCollection(NodeInformation)
+        createEmptyCollection(DailyUserAggregate)
+        createEmptyCollection(UserInformation)
+        createEmptyCollection(ClassInformation)
+
+        and: 'a known data set'
+        final int NUMBER_OF_USERS = 5
+        final int NUMBER_OF_YEARS = 2
+        final int NUMBER_OF_DAYS = 30
+        log.debug("Creating $NUMBER_OF_USERS users")
+        DailyUserAggregateBuilder aggregateBuilder = new DailyUserAggregateBuilder()
+        UserInformationBuilder userInformationBuilder = new UserInformationBuilder()
+        ClassInformationBuilder classInformationBuilder = new ClassInformationBuilder()
+        NodeInformationBuilder nodeInformationBuilder = new NodeInformationBuilder()
+
+        def courses = []
+        10.times{
+            courses << classInformationBuilder.build()
+        }
+         courses.each{
+             template.insert( it )
+         }
+
+        def nodes = []
+
+        10.times{
+            nodes << nodeInformationBuilder.build()
+        }
+
+        nodes.each{
+            template.insert( it )
+        }
+
+        1.upto( NUMBER_OF_USERS ){ student ->
+            UserInformation userInformation = userInformationBuilder.build()
+            userInformation.instance = 'ONE'
+            userInformation.node = 'ONE'
+            userInformation.organization = 'ONE'
+            userInformation.tags = ['ONE', 'TWO', 'THREE']
+            userInformation.isActive = true
+            template.insert( userInformation )
+
+            DailyUserAggregate data = aggregateBuilder.build()
+            data.node = 'ONE'
+            data.organization = 'ONE'
+            data.instance = 'ONE'
+            data.schoolHouses = ['ONE']
+            data.tags = [ 'ONE', 'TWO', 'THREE' ]
+            data.student.classParticipation.first().code = 'ONE'
+            data.student.code = userInformation.studentID
+            data.student.classParticipation.each {
+                it.classInformation = courses[random.nextInt(courses.size())].id
+            }
+            data.userInformation = userInformation.id
+            1.upto( NUMBER_OF_YEARS ) { year ->
+                1.upto( NUMBER_OF_DAYS ) { day ->
+                    data.dateCode = day + (NUMBER_OF_DAYS * (year - 1))
+                    data.id = UUID.randomUUID()
+                    log.debug( "Date code for year $year day $day is $data.dateCode" )
+                    if ( 0 == day % 10 ) {
+                        log.info( "Inserting student $student for year $year day $day into database as record $data.id" )
+                    }
+                    template.insert( data )
+                }
+            }
+        }
+
+        when: 'nothing interesting is done'
+
+        then: 'we have a populated database'
+        true
+
     }
 
     def 'generate test data for Ron'()
