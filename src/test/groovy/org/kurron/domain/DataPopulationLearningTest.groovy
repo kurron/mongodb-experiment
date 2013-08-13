@@ -91,7 +91,7 @@ class DataPopulationLearningTest extends Specification {
         }
         template.createCollection(type)
     }
-
+    @Ignore("TMP")
     def 'execute aggregation'()
     {
         given: 'a valid MongoDB template'
@@ -256,7 +256,7 @@ class DataPopulationLearningTest extends Specification {
         true
 
     }
-
+    @Ignore("TMP")
     def 'generate test data for Ron'()
     {
         given: 'a valid MongoDB template'
