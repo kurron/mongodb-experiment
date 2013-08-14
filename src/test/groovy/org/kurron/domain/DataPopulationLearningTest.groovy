@@ -18,8 +18,8 @@ import spock.lang.Specification
 
 import java.security.SecureRandom
 
-import static org.springframework.data.mongodb.core.query.Criteria.*
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*
+import static org.springframework.data.mongodb.core.query.Criteria.where
 
 /**
  * A learning test just to see how MongoDB might handle large amounts of data.
@@ -324,5 +324,47 @@ class DataPopulationLearningTest extends Specification {
 
     String randomElement( String [] collection ) {
           collection[random.nextInt( collection.size())]
+    }
+
+    def 'generate test data for MSal'()
+    {
+        given: 'a valid MongoDB template'
+        assert template != null
+        createEmptyCollection(DailyUserAggregate)
+
+        and: 'a known data set'
+        final int NUMBER_OF_USERS = 5
+        final int NUMBER_OF_YEARS = 2
+        final int NUMBER_OF_DAYS = 30
+        log.debug( "Creating $NUMBER_OF_USERS users" )
+        DailyUserAggregateBuilder aggregateBuilder = new DailyUserAggregateBuilder()
+
+        1.upto( NUMBER_OF_USERS ) { student ->
+            DailyUserAggregate data = aggregateBuilder.build()
+            data.node = 'ONE'
+            data.organization = 'ONE'
+            data.instance = 'ONE'
+            data.schoolHouses = ['ONE']
+            data.tags = [ 'ONE', 'TWO', 'THREE' ]
+            data.student.classParticipation.first().code = 'ONE'
+            data.instructor.instructorID = "TEACHER.$student"
+            log.info( "User with instructor ID of $data.instructor.instructorID created" )
+            1.upto( NUMBER_OF_YEARS ) { year ->
+                1.upto( NUMBER_OF_DAYS ) { day ->
+                    data.dateCode = day + (NUMBER_OF_DAYS * (year - 1))
+                    data.id = UUID.randomUUID()
+                    log.debug( "Date code for year $year day $day is $data.dateCode" )
+                    if ( 0 == day % 10 ) {
+                        log.info( "Inserting student $student for year $year day $day into database as record $data.id" )
+                    }
+                    template.insert( data )
+                }
+            }
+        }
+
+        when: 'nothing interesting is done'
+
+        then: 'we have a populated database'
+        true
     }
 }
