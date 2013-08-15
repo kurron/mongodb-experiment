@@ -44,6 +44,13 @@ public class RandomDataGenerator {
         return platforms[randomArrayIndex( platforms.size() )]
     }
 
+    /**
+     * Returns a random value from the passed in array
+     * @return a random value from inputted array
+     */
+    public randomValue( final ArrayList value){
+        return value[randomArrayIndex( value.size() )]
+    }
 
     /**
      * Generates a random valid platform

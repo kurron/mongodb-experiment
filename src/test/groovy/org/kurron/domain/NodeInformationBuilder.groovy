@@ -15,6 +15,7 @@ class NodeInformationBuilder {
      */
     private final RandomDataGenerator generator = new RandomDataGenerator()
 
+
     NodeInformation build(){
         NodeInformation node = new NodeInformation()
         node.id = generator.randomObjectId()

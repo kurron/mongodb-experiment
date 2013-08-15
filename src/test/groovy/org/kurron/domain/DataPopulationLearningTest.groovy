@@ -4,6 +4,7 @@ import com.mongodb.AggregationOutput
 import com.mongodb.BasicDBObject
 import com.mongodb.DBObject
 import groovy.util.logging.Slf4j
+import org.kurron.RandomDataGenerator
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
 import org.springframework.data.mongodb.MongoCollectionUtils
@@ -15,6 +16,7 @@ import org.springframework.data.mongodb.core.query.Query
 import org.springframework.test.context.ContextConfiguration
 import spock.lang.Ignore
 import spock.lang.Specification
+import org.kurron.RandomDataGenerator.*
 
 import java.security.SecureRandom
 
@@ -35,7 +37,7 @@ class DataPopulationLearningTest extends Specification {
     @Autowired
     MongoOperations template
 
-    //@Ignore( 'I do not want to accidentally blow away my current data set' )
+    @Ignore( 'I do not want to accidentally blow away my current data set' )
     def 'import data'()
     {
         given: 'a valid MongoDB template'
@@ -192,11 +194,13 @@ class DataPopulationLearningTest extends Specification {
         final int NUMBER_OF_USERS = 5
         final int NUMBER_OF_YEARS = 2
         final int NUMBER_OF_DAYS = 30
+        final int NUMBER_OF_NODES = 2
         log.debug("Creating $NUMBER_OF_USERS users")
         DailyUserAggregateBuilder aggregateBuilder = new DailyUserAggregateBuilder()
         UserInformationBuilder userInformationBuilder = new UserInformationBuilder()
         ClassInformationBuilder classInformationBuilder = new ClassInformationBuilder()
         NodeInformationBuilder nodeInformationBuilder = new NodeInformationBuilder()
+        final RandomDataGenerator generator = new RandomDataGenerator()
 
         def courses = []
         10.times{
@@ -208,29 +212,33 @@ class DataPopulationLearningTest extends Specification {
 
         def nodes = []
 
-        10.times{
+        def nodeNames = []
+
+        1.upto( NUMBER_OF_NODES ){
             nodes << nodeInformationBuilder.build()
-        }
+         }
 
         nodes.each{
+            it.instance = "one"
+            nodeNames << it.nickname
             template.insert( it )
         }
 
         1.upto( NUMBER_OF_USERS ){ student ->
             UserInformation userInformation = userInformationBuilder.build()
             userInformation.instance = 'ONE'
-            userInformation.node = 'ONE'
+            userInformation.node = generator.randomValue( nodeNames )
             userInformation.organization = 'ONE'
             userInformation.tags = ['ONE', 'TWO', 'THREE']
             userInformation.isActive = true
             template.insert( userInformation )
 
             DailyUserAggregate data = aggregateBuilder.build()
-            data.node = 'ONE'
-            data.organization = 'ONE'
-            data.instance = 'ONE'
+            data.node = userInformation.node
+            data.organization = userInformation.organization
+            data.instance = userInformation.instance
             data.schoolHouses = ['ONE']
-            data.tags = [ 'ONE', 'TWO', 'THREE' ]
+            data.tags = userInformation.tags
             data.student.classParticipation.first().code = 'ONE'
             data.student.code = userInformation.studentID
             data.student.classParticipation.each {
