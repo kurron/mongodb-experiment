@@ -22,6 +22,10 @@ class NodeInformation {
     @Field( value = 'instance')
     String instance
 
+    @JsonProperty( value = 'node-type')
+    @Field( value = 'node-type')
+    String nodeType
+
     @JsonProperty( value = 'name')
     @Field( value = 'name')
     String name
@@ -67,6 +71,7 @@ class NodeInformation {
         return "UserInformation{" +
                 "id='" + id + '\'' +
                 ", instance='" + instance + '\'' +
+                ", nodeType='" + nodeType + '\'' +
                 ", name=" + name + '\'' +
                 ", nickname=" + nickname + '\'' +
                 ", status=" + status + '\'' +

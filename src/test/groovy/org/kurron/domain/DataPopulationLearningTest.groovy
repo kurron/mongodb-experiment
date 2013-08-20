@@ -192,9 +192,10 @@ class DataPopulationLearningTest extends Specification {
 
         and: 'a known data set'
         final int NUMBER_OF_USERS = 5
-        final int NUMBER_OF_YEARS = 2
+        final int NUMBER_OF_YEARS = 5
         final int NUMBER_OF_DAYS = 30
         final int NUMBER_OF_NODES = 2
+        log.debug("Creating $NUMBER_OF_NODES nodes")
         log.debug("Creating $NUMBER_OF_USERS users")
         DailyUserAggregateBuilder aggregateBuilder = new DailyUserAggregateBuilder()
         UserInformationBuilder userInformationBuilder = new UserInformationBuilder()

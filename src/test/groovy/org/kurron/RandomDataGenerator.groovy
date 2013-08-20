@@ -27,6 +27,18 @@ public class RandomDataGenerator {
      */
     private final ArrayList nodeStatus = ['trial', 'active', 'inactive']
 
+    /**
+     * Legal Node Types
+     */
+    private final ArrayList nodeTypes = ['Public Library', 'University Library', 'Company', 'Government Agency', 'Language Lab', 'K-12 School', 'Other']
+
+    /**
+     * Generates a random valid Node Type
+     * @return a random string from nodeTypes
+     */
+    public String randomNodeType(){
+        return nodeTypes[randomArrayIndex( nodeTypes.size() )]
+    }
 
     /**
      * Generates a random valid node status

@@ -20,6 +20,7 @@ class NodeInformationBuilder {
         NodeInformation node = new NodeInformation()
         node.id = generator.randomObjectId()
         node.instance = generator.randomInstance()
+        node.nodeType = generator.randomNodeType()
         node.name = generator.randomHexString()
         node.nickname = generator.randomHexString()
         node.status = generator.randomNodeStatus()
