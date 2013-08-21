@@ -11,11 +11,15 @@ class DailyUserAggregateBuilder {
      */
     private final RandomDataGenerator generator = new RandomDataGenerator()
 
-    private final knownLanguageListing = ['ENGLISH', 'ARABIC']
-
-    private final learningLanguageListing = ['SPANISH', 'FRENCH', 'GERMAN']
-
     private final ClassParticipationBuilder classParticipationBuilder = new ClassParticipationBuilder()
+
+    private final AssetListBuilder assetListBuilder = new AssetListBuilder()
+
+    private final LanguagePairBuilder languagePairBuilder = new LanguagePairBuilder()
+
+    private final LearningContentBuilder learningContentBuilder = new LearningContentBuilder()
+
+    private final CourseProgressBuilder courseProgressBuilder = new CourseProgressBuilder()
 
     DailyUserAggregate build() {
         DailyUserAggregate aggregate = new DailyUserAggregate()
@@ -37,39 +41,24 @@ class DailyUserAggregateBuilder {
         aggregate.student.sustainment.staleItemCount = generator.randomNumberExclusive( aggregate.student.sustainment.learnedItemCount )
         aggregate.student.sustainment.totalRefreshmentTime = generator.randomNumberExclusive( 100 )
 
-        4.times {
-            AssetList asset = new AssetList()
-            asset.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
-            asset.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
-            asset.assetType = generator.randomAssetType()
-            asset.platform = generator.randomPlatform()
-            aggregate.student.assetsDownloaded << asset
+        4.times{
+            aggregate.student.assetsDownloaded << assetListBuilder.build()
         }
 
         4.times {
-            LanguagePair pair = new LanguagePair()
-            pair.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
-            pair.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
-            pair.sessionCount = generator.randomNumberExclusive( 10 )
-            pair.sessionTime = pair.sessionCount // have one-minute sessions
-            pair.platform = generator.randomPlatform()
-            aggregate.student.languagesAccessed << pair
+            aggregate.student.languagesAccessed << languagePairBuilder.build()
         }
 
         4.times {
-            LearningContent content = new LearningContent()
-            content.type = generator.randomBoolean() ? 'List' : 'Unit'
-            content.title = generator.randomHexString()
-            LanguagePair pair = new LanguagePair()
-            pair.knownCode = knownLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
-            pair.learningCode = learningLanguageListing[ generator.randomArrayIndex( knownLanguageListing.size() ) ]
-            pair.sessionCount = generator.randomNumberExclusive( 10 )
-            pair.sessionTime = pair.sessionCount // one-minute sessions
-            content.pair = pair
-            aggregate.student.learningContent << content
+            aggregate.student.learningContent << learningContentBuilder.build()
         }
+
         3.times {
             aggregate.student.classParticipation << classParticipationBuilder.build()
+        }
+
+        4.times {
+            aggregate.student.courseProgress << courseProgressBuilder.build()
         }
 
         aggregate.instructor.instructorID = 'TEACHER.' + generator.randomHexString()

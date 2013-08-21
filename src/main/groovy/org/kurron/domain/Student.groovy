@@ -34,6 +34,10 @@ class Student {
     @Field( value = 'class-enrollment' )
     List<ClassParticipation> classParticipation = new ArrayList<>( 8 )
 
+    @JsonProperty( value = 'course-progress')
+    @Field( value = 'course-progress')
+    List<CourseProgress> courseProgress = new ArrayList<>( 4 )
+
     @Override
     public String toString() {
         return "Student{" +
@@ -42,6 +46,7 @@ class Student {
                 ", languagesAccessed=" + languagesAccessed +
                 ", learningContent=" + learningContent +
                 ", classParticipation=" + classParticipation +
+                ", courseProgress=" + courseProgress +
                 '}';
     }
 }

@@ -35,6 +35,58 @@ public class RandomDataGenerator {
     private final ArrayList nodeTypes = ['Public Library', 'University Library', 'Company', 'Government Agency', 'Language Lab', 'K-12 School', 'Other']
 
     /**
+     * Legal Course Statuses
+     */
+    private final ArrayList courseStatuses = ['inprogress', 'complete']
+
+    /**
+     * Legal Known Languages
+     */
+    private final ArrayList knownLanguages = ['ENGLISH', 'ARABIC']
+
+    /**
+     * Legal Learning Languages
+     */
+    private final ArrayList learningLanguages = ['SPANISH', 'FRENCH', 'GERMAN']
+
+    /**
+     * Legal Content Types
+     */
+    private final ArrayList contentTypes = ['List', 'Unit']
+
+    /**
+     * Generates a random Legal Content Type
+     * @return a random legal Content Type
+     */
+    public String randomContentType(){
+        return contentTypes[randomArrayIndex( contentTypes.size() )]
+    }
+
+    /**
+     * Generates a random Legal Learning Language Code
+     * @return a Legal Learning Language Code
+     */
+    public String randomLearningLanguage(){
+        return learningLanguages[randomArrayIndex( learningLanguages.size() )]
+    }
+
+    /**
+     * Generates a random Legal Known Language Code
+     * @return Legal Known Language Code
+     */
+    public String randomKnownLanguage(){
+        return knownLanguages[randomArrayIndex( knownLanguages.size() )]
+    }
+
+    /**
+     * Generates a random valid course status
+     * @return a random valid course type
+     */
+    public String randomCourseStatus(){
+        return courseStatuses[randomArrayIndex( courseStatuses.size() )]
+    }
+
+    /**
      * Generates a random valid Node Type
      * @return a random string from nodeTypes
      */
