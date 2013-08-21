@@ -11,11 +11,13 @@ import org.kurron.RandomDataGenerator
  */
 class CourseProgressBuilder {
     private final RandomDataGenerator generator = new RandomDataGenerator()
-    private final LanguagePairBuilder languagePair = new LanguagePairBuilder()
+    private final LanguagePairWithoutPlatformBuilder languagePair = new LanguagePairWithoutPlatformBuilder()
 
     CourseProgress build() {
         CourseProgress courseProgress = new CourseProgress()
+        courseProgress.courseID = generator.randomHexString()
         courseProgress.courseStatus = generator.randomCourseStatus()
         courseProgress.pair = languagePair.build()
+        courseProgress
     }
 }

@@ -9,18 +9,23 @@ import org.springframework.data.mongodb.core.mapping.Field
  */
 @JsonAutoDetect( getterVisibility = JsonAutoDetect.Visibility.NONE, setterVisibility = JsonAutoDetect.Visibility.NONE, isGetterVisibility = JsonAutoDetect.Visibility.NONE, fieldVisibility = JsonAutoDetect.Visibility.NONE )
 class CourseProgress {
+    @JsonProperty( value = 'course-id')
+    @Field( value = 'course-id')
+    String courseID
+
     @JsonProperty( value = 'course-status')
     @Field( value = 'course-status')
     String courseStatus
 
     @JsonProperty( value = 'language-pair' )
     @Field( value = 'language-pair' )
-    LanguagePair pair
+    LanguagePairWithoutPlatform pair
 
     @Override
     public String toString() {
         return "CourseProgress{" +
-                "courseStatus=" + courseStatus +
+                "courseID=" + courseID +
+                ", courseStatus=" + courseStatus +
                 ", pair=" + pair +
                 '}';
     }

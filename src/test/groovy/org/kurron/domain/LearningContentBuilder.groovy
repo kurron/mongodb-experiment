@@ -11,11 +11,12 @@ import org.kurron.RandomDataGenerator
  */
 class LearningContentBuilder {
     private final RandomDataGenerator generator = new RandomDataGenerator()
-    private final LanguagePairBuilder languagePair = new LanguagePairBuilder()
+    private final LanguagePairWithoutPlatformBuilder languagePair = new LanguagePairWithoutPlatformBuilder()
 
     LearningContent build() {
         LearningContent content = new LearningContent()
         content.type = generator.randomContentType()
+        content.title = generator.randomHexString()
         content.pair = languagePair.build()
         content
     }

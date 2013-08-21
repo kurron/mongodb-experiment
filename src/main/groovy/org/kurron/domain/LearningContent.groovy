@@ -19,7 +19,7 @@ class LearningContent {
 
     @JsonProperty( value = 'language-pair' )
     @Field( value = 'language-pair' )
-    LanguagePair pair
+    LanguagePairWithoutPlatform pair
 
     @Override
     public String toString() {
