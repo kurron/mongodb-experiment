@@ -1,5 +1,6 @@
 package org.kurron.domain
 
+import org.joda.time.DateTime
 import org.kurron.RandomDataGenerator
 
 /**
@@ -14,7 +15,7 @@ class NodeInformationBuilder {
      * Generates random data.
      */
     private final RandomDataGenerator generator = new RandomDataGenerator()
-
+    DateTime now = new DateTime()
 
     NodeInformation build(){
         NodeInformation node = new NodeInformation()
@@ -24,8 +25,8 @@ class NodeInformationBuilder {
         node.name = generator.randomHexString()
         node.nickname = generator.randomHexString()
         node.status = generator.randomNodeStatus()
-        node.startDate = generator.randomLong()
-        node.expirationDate = node.startDate + generator.randomLong()
+        node.startDate = generator.randomDate(generator.randomNumberInclusive( 120 ))
+        node.expirationDate = generator.randomDate( generator.randomNumberInclusive( 60 ) )
         node.tl = generator.randomHexString()
         node.partnerCustomer = generator.randomHexString()
         node.value = generator.randomLong()

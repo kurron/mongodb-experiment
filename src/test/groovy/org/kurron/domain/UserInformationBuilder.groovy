@@ -27,9 +27,10 @@ class UserInformationBuilder {
         user.instructorID = generator.randomHexString()
         user.administratorID = generator.randomHexString()
         user.email = generator.randomEMail()
-        user.lastLogInAsStudent = now.minusDays( 60 ).toDate()
-        user.lastLogInAsInstructor = now.minusDays( 90 ).toDate()
-        user.lastLogInAsAdministrator = now.minusDays( 120 ).toDate()
+        user.phoneNumber = generator.randomPhoneNumber()
+        user.lastLogInAsStudent = generator.randomDate( generator.randomNumberInclusive( 60 ) )
+        user.lastLogInAsInstructor = generator.randomDate( generator.randomNumberInclusive( 90 ) )
+        user.lastLogInAsAdministrator = generator.randomDate( generator.randomNumberInclusive( 120 ) )
         user
     }
 }

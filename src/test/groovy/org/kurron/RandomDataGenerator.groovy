@@ -1,5 +1,7 @@
 package org.kurron
 
+import org.joda.time.DateTime
+
 import java.security.SecureRandom
 
 /**
@@ -165,5 +167,30 @@ public class RandomDataGenerator {
     public boolean randomBoolean()
     {
         return generator.nextBoolean()
+    }
+
+    /**
+     * Generates a Random date
+     * @returns a random date
+     */
+    public Date randomDate( final int Value)
+    {
+        DateTime now = new DateTime()
+        return  now.minusDays( Value ).toDate()
+    }
+
+    /**
+     * Generates a random legal Phone Number
+     * return phone number < XXX-XXX-XXXX >
+     */
+    public String randomPhoneNumber ()
+    {
+        Random rand = new Random()
+        int max = 10
+        def numbList = []
+        (1..10).each {
+            numbList << rand.nextInt( max ).toString()
+        }
+        return numbList[0] + numbList[1] + numbList[2] + "-" +  numbList[3] + numbList[4] + numbList[5] + "-" + numbList[6] + numbList[7] + numbList[8] + numbList[9]
     }
 }

@@ -51,6 +51,10 @@ class UserInformation {
     @Field( value = 'email' )
     String email
 
+    @JsonProperty( value = 'phone-number' )
+    @Field( value = 'phone-number')
+    String phoneNumber
+
     @JsonProperty( value = 'last-logged-in-as-student' )
     @Field( value = 'last-logged-in-as-student' )
     Date lastLogInAsStudent
@@ -81,6 +85,7 @@ class UserInformation {
                 ", dateDeleted=" + dateDeleted +
                 ", studentID='" + studentID + '\'' +
                 ", email='" + email + '\'' +
+                ", phone-number='" + phoneNumber + '\'' +
                 ", lastLogInAsStudent=" + lastLogInAsStudent +
                 ", lastLogInAsInstructor=" + lastLogInAsInstructor +
                 ", lastLogInAsAdministrator=" + lastLogInAsAdministrator +

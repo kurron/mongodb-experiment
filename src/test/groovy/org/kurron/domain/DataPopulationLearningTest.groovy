@@ -93,7 +93,7 @@ class DataPopulationLearningTest extends Specification {
         }
         template.createCollection(type)
     }
-
+    @Ignore('TMP')
     def 'execute aggregation'()
     {
         given: 'a valid MongoDB template'
@@ -194,7 +194,7 @@ class DataPopulationLearningTest extends Specification {
         final int NUMBER_OF_USERS = 5
         final int NUMBER_OF_YEARS = 5
         final int NUMBER_OF_DAYS = 30
-        final int NUMBER_OF_NODES = 2
+        final int NUMBER_OF_NODES = 30
         log.debug("Creating $NUMBER_OF_NODES nodes")
         log.debug("Creating $NUMBER_OF_USERS users")
         DailyUserAggregateBuilder aggregateBuilder = new DailyUserAggregateBuilder()
@@ -265,7 +265,7 @@ class DataPopulationLearningTest extends Specification {
         true
 
     }
-
+    @Ignore('TMP')
     def 'generate test data for Ron'()
     {
         given: 'a valid MongoDB template'
@@ -334,7 +334,7 @@ class DataPopulationLearningTest extends Specification {
     String randomElement( String [] collection ) {
           collection[random.nextInt( collection.size())]
     }
-
+    @Ignore('TMP')
     def 'generate test data for MSal'()
     {
         given: 'a valid MongoDB template'

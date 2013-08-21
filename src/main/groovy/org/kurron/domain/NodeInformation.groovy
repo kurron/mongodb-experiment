@@ -40,11 +40,11 @@ class NodeInformation {
 
     @JsonProperty( value = 'start-date')
     @Field( value = 'start-date')
-    long startDate
+    Date startDate
 
-    @JsonProperty( value = 'expiration-date')
-    @Field( value = 'expiration-date')
-    long expirationDate
+    @JsonProperty( value = 'expiration-date' )
+    @Field( value = 'expiration-date' )
+    Date expirationDate
 
     @JsonProperty( value = 'tl')
     @Field( value = 'tl')
