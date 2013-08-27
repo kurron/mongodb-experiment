@@ -17,6 +17,10 @@ class LearningContent {
     @Field( value = 'content-title' )
     String title
 
+    @JsonProperty( value = 'content-status')
+    @Field( value = 'content-status')
+    String status
+
     @JsonProperty( value = 'language-pair' )
     @Field( value = 'language-pair' )
     LanguagePairWithoutPlatform pair
@@ -26,6 +30,7 @@ class LearningContent {
         return "LearningContent{" +
                 "type='" + type + '\'' +
                 ", title='" + title + '\'' +
+                ", status='" + status + '\'' +
                 ", pair=" + pair +
                 '}';
     }

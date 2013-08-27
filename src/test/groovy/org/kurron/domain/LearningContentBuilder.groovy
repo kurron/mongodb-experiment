@@ -17,6 +17,7 @@ class LearningContentBuilder {
         LearningContent content = new LearningContent()
         content.type = generator.randomContentType()
         content.title = generator.randomHexString()
+        content.status = generator.randomCourseStatus()
         content.pair = languagePair.build()
         content
     }
